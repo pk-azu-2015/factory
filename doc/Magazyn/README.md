@@ -1,8 +1,56 @@
-  **Architektura zorientowana na usługi**
-  ----------------------------------------- -------- --------------------------------- -----------------
-  2
+#Magazyn
+**Osoby odpowiedzialne:**
+..* Adrian Molka
+..* Strahil Mitrev
+..* Marcin Lewicki
 
-**Projekt usługi magazynu dla systemu fabryki**
+##Operacja dostarczane przez usługę
+
+| Operacja | Wejście | Wyjście | Wyjątek | 
+| -------- | :-----: | :-----: | ------: | 
+| Dodaj forme | idProjektu:int | void | - |
+| Użyj forme | idProjektu:int | void | 404 |
+| Umieść produkt | idProjektu:int, stan:Stan | void | - |
+| Weź produkt | idProjektu:int, stan:Stan | Produkt | 404 |
+| Weź surowiec | ile:int | void | - |
+| Zamów surowiec | void | void | - |
+| Dodaj surowiec | ile:int | void  | - |
+| Zwróć listę produktów w stanie | stan:Stan | List<id:int> | - |
+
+***Opis***
+
+* **Dodaj forme -** operacja odpowiada za dodanie formy danego typu(idProjektu), na stan magazynu. 
+* **Użyj forme -**  operacja odpowiada za użycie formy, danego typu(idProjektu). Każdą formę można użyć 10 razy.
+* **Umieść produkt -** operacja dodaje na stan magazynu produkt (idProjektu) w danym stanie (stan).
+* **Weź produkt -** operacja wydaje ze stanu magazynu produkt (idProjektu) w danym stanie (stan).
+* **Weź surowiec -** operacja wydaje ze stanu magazynu surowiec w zadanej ilości (ile).
+* **Zamów surowiec -** operacja wywoływana automatycznie w momencie alarmującej ilości surowca na stanie magazynu. 
+    Wywoływana na spedycji. Nie powinna być wywoływania przez innego użytkownika niż magazyn.
+* **Zwróć listę produktów w stanie -** operacja zwraca **listę id** produktów, na stanie magazynu o zadanym stanie (stan).
+
+***Diagram interfejsu***
+
+![](media/interfejsMagazyn.png)
+
+**Wizja struktury klasy Projekt**
+
+![](media/projektClass.png)
+
+##Diagramy sekwencji:
+
+Poniżej przedstawione zostały diagramy sekwencji, które opisują
+interakcję pomiędzy usługą magazynu, a pozostałymi usługami. User to
+dowolna usługa wywołująca metodę innej usługi.
+
+![](media/image2.png) 
+
+![](media/image3.png)
+
+![](media/image4.png)
+
+![](media/image5.png)
+
+##Szczegóły implementacyjne 
 
 **Diagramy klas:**
 
@@ -28,13 +76,3 @@ gotowy). Do projektu należy jeszcze zdefiniować dostępne kolory jako, że
 można go pomalowac, do formy natomiast należy zdefiniowac jakieś
 kształty. Ich definicją powinnien zająć się zespół odpowiedzialny za
 usługę produkcji. Na diagramach przedstawione zostały propozycje.
-
-**Diagramy sekwencji:**
-
-Poniżej przedstawione zostały diagramy sekwencji, które opisują
-interakcję pomiędzy usługą magazynu, a pozostałymi usługami. User to
-dowolna usługa wywołująca metodę innej usługi.
-
-![](media/image2.png) ![](media/image3.png)
-
-![](media/image4.png)![](media/image5.png)
