@@ -24,16 +24,19 @@ Powiązania zawarte są w operacjach „Zgłoszenie_Naprawy” (powiązanie z Ko
 
 
 ###Diagramy:
-Diagram klas:
+**Diagram klas:**
 
 ![alt text](http://funkyimg.com/i/23Qy3.png "Diagram klas usługi Naprawa")
 
-Diagram przypadków użycia:
+**Diagram przypadków użycia:**
 ![alt text](http://funkyimg.com/i/23Qy4.png "Diagram przypadków użycia")
 
+**Diagram powiązania z usługami Magazynu:**
+![alt text](http://funkyimg.com/i/243LU.jpg "Diagram powiązania z Magazynem")
 
 ```
-changelog:
+changelog :
+2015-11-03: Dodanie diagramu powiązania z usługami Magazynu.
 2015-10-26: Zamieszczenie diagramów, relacji z innymi usługami, drobne poprawki.
 2015-10-20: Dodanie listy i opisu operacji.
 ```
