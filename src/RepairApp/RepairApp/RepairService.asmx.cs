@@ -18,9 +18,20 @@ namespace RepairApp
     {
 
         [WebMethod]
-        public string HelloWorld()
+        public Boolean naprawProdukt(int idProduktu, int stan)
         {
-            return "Hello World";
+            Boolean status = false;
+            if(stan == 6)
+            {
+                //Produkt produkt = Magazyn.wezProdukt(idProduktu, stan);
+                //if(produkt!=null)
+                //{  
+                //  Magazyn.umiescProdukt(idProduktu, 4);
+                //  status = true;
+                //}
+                status = true;
+            }
+            return status;
         }
     }
 }
