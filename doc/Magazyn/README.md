@@ -1,21 +1,21 @@
 #Magazyn
 **Osoby odpowiedzialne:**
-..* Adrian Molka
-..* Strahil Mitrev
-..* Marcin Lewicki
+* Adrian Molka
+* Strahil Mitrev
+* Marcin Lewicki
 
-##Operacja dostarczane przez usługę
+##Operacje dostarczane przez usługę
 
 | Operacja | Wejście | Wyjście | Wyjątek | 
 | -------- | :-----: | :-----: | ------: | 
 | Dodaj forme | idProjektu:int | void | - |
 | Użyj forme | idProjektu:int | void | 404 |
-| Umieść produkt | idProjektu:int, stan:Stan | void | - |
-| Weź produkt | idProjektu:int, stan:Stan | Produkt | 404 |
-| Weź surowiec | ile:int | void | - |
+| Umieść produkt | idProjektu:int, idStanu:int | void | - |
+| Weź produkt | idProjektu:int, idStanu:int | Produkt | 404 |
+| Weź surowiec | ilosc:int | void | - |
 | Zamów surowiec | void | void | - |
-| Dodaj surowiec | ile:int | void  | - |
-| Zwróć listę produktów w stanie | stan:Stan | List<id:int> | - |
+| Dodaj surowiec | ilosc:int | void  | - |
+| Zwróć listę produktów w stanie | idStanu:int | List<id:int> | - |
 
 ***Opis***
 
@@ -27,6 +27,32 @@
 * **Zamów surowiec -** operacja wywoływana automatycznie w momencie alarmującej ilości surowca na stanie magazynu. 
     Wywoływana na spedycji. Nie powinna być wywoływania przez innego użytkownika niż magazyn.
 * **Zwróć listę produktów w stanie -** operacja zwraca **listę id** produktów, na stanie magazynu o zadanym stanie (stan).
+
+***MAPOWANIA INT <-> ENUMÓW***
+
+Usługi przyjmują inty które odpowiadają poszczególnym enumów
+
+ _Stan_
+
+| int | enum |
+| --- | ---- |
+| 0 | ODLANY |
+| 1 | OSZLIFOWANY |
+| 2 | POMALOWANY |
+| 3 | DOKONTROLI |
+| 4 | GOTOWY |
+| 5 | ZEPSUTY |
+
+
+_IdProjektu_
+
+| int | enum | 
+| ----| ---- | 
+| 0 | KOŁO |
+| 1 | SILNIK |
+| 2 | KAROSERIA |
+| 3 | PILOT | 
+| 4 | AUTO |
 
 ***Diagram interfejsu***
 
