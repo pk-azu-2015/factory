@@ -1,6 +1,9 @@
 ###Naprawa
 Osoby odpowiedzialne: Jan Węgrzyn, Dawid Płoskonka.
 
+###Adres uslugi:
+http://azurepairapp2015.somee.com/RepairService.asmx
+
 ###Operacje usługi:
 | Operacja           | Wejście                                          | Wyjście   | Wyjątki |
 | ---------------- | ------------------------------------------------ | -------   | :---: |
@@ -26,8 +29,9 @@ Powiązania zawarte są w operacjach „naprawProdukt” (powiązanie z Magazyne
 
 ```
 changelog :
+2015-11-17: Hosting uslugi + dodanie adresu.
+2015-11-17: Uaktualnienie opisu.
 2015-11-03: Dodanie diagramu powiązania z usługami Magazynu.
 2015-10-26: Zamieszczenie diagramów, relacji z innymi usługami, drobne poprawki.
 2015-10-20: Dodanie listy i opisu operacji.
-2015-11-17: Uaktualnienie opisu.
 ```
