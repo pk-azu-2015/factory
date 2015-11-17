@@ -21,7 +21,7 @@ namespace RepairApp
         public Boolean naprawProdukt(int idProduktu, int stan)
         {
             Boolean status = false;
-            if(stan == 6)
+            if(stan == 5)
             {
                 //Produkt produkt = Magazyn.wezProdukt(idProduktu, stan);
                 //if(produkt!=null)
