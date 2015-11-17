@@ -13,12 +13,12 @@ Osoby odpowiedzialne: Jan Węgrzyn, Dawid Płoskonka.
 Powiązania zawarte są w operacjach „naprawProdukt” (powiązanie z Magazynem – pobranie i umieszczenie produktu o zadanym id).
 
 
-###[out of date] Diagramy:
-**Diagram klas:**
+###Diagramy:
+**[out of date] Diagram klas:**
 
 ![alt text](http://funkyimg.com/i/23Qy3.png "Diagram klas usługi Naprawa")
 
-**Diagram przypadków użycia:**
+**[out of date] Diagram przypadków użycia:**
 ![alt text](http://funkyimg.com/i/23Qy4.png "Diagram przypadków użycia")
 
 **Diagram powiązania z usługami Magazynu:**
