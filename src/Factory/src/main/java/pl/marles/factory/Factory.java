@@ -1,12 +1,10 @@
 package pl.marles.factory;
 
-import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
-import javax.ejb.Stateless;
+import javax.jws.WebService;
 
 @WebService(serviceName = "Factory")
-@Stateless()
 public class Factory {
     
     @WebMethod(operationName = "wykonajForme")
