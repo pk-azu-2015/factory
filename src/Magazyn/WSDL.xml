@@ -4,17 +4,11 @@
 <xsd:import namespace="http://magazyn.azu.pk.edu.pl/" schemaLocation="http://localhost:8080/Magazyn/Magazyn?xsd=1"/>
 </xsd:schema>
 </types>
-<message name="wezProdukt">
-<part name="parameters" element="tns:wezProdukt"/>
+<message name="zwrocListeIDProduktow">
+<part name="parameters" element="tns:zwrocListeIDProduktow"/>
 </message>
-<message name="wezProduktResponse">
-<part name="parameters" element="tns:wezProduktResponse"/>
-</message>
-<message name="wezSurowiec">
-<part name="parameters" element="tns:wezSurowiec"/>
-</message>
-<message name="wezSurowiecResponse">
-<part name="parameters" element="tns:wezSurowiecResponse"/>
+<message name="zwrocListeIDProduktowResponse">
+<part name="parameters" element="tns:zwrocListeIDProduktowResponse"/>
 </message>
 <message name="dodajForme">
 <part name="parameters" element="tns:dodajForme"/>
@@ -22,17 +16,11 @@
 <message name="dodajFormeResponse">
 <part name="parameters" element="tns:dodajFormeResponse"/>
 </message>
-<message name="zwrocListeIDProduktow">
-<part name="parameters" element="tns:zwrocListeIDProduktow"/>
+<message name="umiescProdukt">
+<part name="parameters" element="tns:umiescProdukt"/>
 </message>
-<message name="zwrocListeIDProduktowResponse">
-<part name="parameters" element="tns:zwrocListeIDProduktowResponse"/>
-</message>
-<message name="zamowSurowiec">
-<part name="parameters" element="tns:zamowSurowiec"/>
-</message>
-<message name="zamowSurowiecResponse">
-<part name="parameters" element="tns:zamowSurowiecResponse"/>
+<message name="umiescProduktResponse">
+<part name="parameters" element="tns:umiescProduktResponse"/>
 </message>
 <message name="dodajSurowiec">
 <part name="parameters" element="tns:dodajSurowiec"/>
@@ -40,64 +28,67 @@
 <message name="dodajSurowiecResponse">
 <part name="parameters" element="tns:dodajSurowiecResponse"/>
 </message>
+<message name="wezSurowiec">
+<part name="parameters" element="tns:wezSurowiec"/>
+</message>
+<message name="wezSurowiecResponse">
+<part name="parameters" element="tns:wezSurowiecResponse"/>
+</message>
 <message name="uzyjForme">
 <part name="parameters" element="tns:uzyjForme"/>
 </message>
 <message name="uzyjFormeResponse">
 <part name="parameters" element="tns:uzyjFormeResponse"/>
 </message>
-<message name="umiescProdukt">
-<part name="parameters" element="tns:umiescProdukt"/>
+<message name="wezProdukt">
+<part name="parameters" element="tns:wezProdukt"/>
 </message>
-<message name="umiescProduktResponse">
-<part name="parameters" element="tns:umiescProduktResponse"/>
+<message name="wezProduktResponse">
+<part name="parameters" element="tns:wezProduktResponse"/>
+</message>
+<message name="zamowSurowiec">
+<part name="parameters" element="tns:zamowSurowiec"/>
+</message>
+<message name="zamowSurowiecResponse">
+<part name="parameters" element="tns:zamowSurowiecResponse"/>
 </message>
 <portType name="Magazyn">
-<operation name="wezProdukt">
-<input wsam:Action="http://magazyn.azu.pk.edu.pl/Magazyn/wezProduktRequest" message="tns:wezProdukt"/>
-<output wsam:Action="http://magazyn.azu.pk.edu.pl/Magazyn/wezProduktResponse" message="tns:wezProduktResponse"/>
-</operation>
-<operation name="wezSurowiec">
-<input wsam:Action="http://magazyn.azu.pk.edu.pl/Magazyn/wezSurowiecRequest" message="tns:wezSurowiec"/>
-<output wsam:Action="http://magazyn.azu.pk.edu.pl/Magazyn/wezSurowiecResponse" message="tns:wezSurowiecResponse"/>
+<operation name="zwrocListeIDProduktow">
+<input wsam:Action="http://magazyn.azu.pk.edu.pl/Magazyn/zwrocListeIDProduktowRequest" message="tns:zwrocListeIDProduktow"/>
+<output wsam:Action="http://magazyn.azu.pk.edu.pl/Magazyn/zwrocListeIDProduktowResponse" message="tns:zwrocListeIDProduktowResponse"/>
 </operation>
 <operation name="dodajForme">
 <input wsam:Action="http://magazyn.azu.pk.edu.pl/Magazyn/dodajFormeRequest" message="tns:dodajForme"/>
 <output wsam:Action="http://magazyn.azu.pk.edu.pl/Magazyn/dodajFormeResponse" message="tns:dodajFormeResponse"/>
 </operation>
-<operation name="zwrocListeIDProduktow">
-<input wsam:Action="http://magazyn.azu.pk.edu.pl/Magazyn/zwrocListeIDProduktowRequest" message="tns:zwrocListeIDProduktow"/>
-<output wsam:Action="http://magazyn.azu.pk.edu.pl/Magazyn/zwrocListeIDProduktowResponse" message="tns:zwrocListeIDProduktowResponse"/>
-</operation>
-<operation name="zamowSurowiec">
-<input wsam:Action="http://magazyn.azu.pk.edu.pl/Magazyn/zamowSurowiecRequest" message="tns:zamowSurowiec"/>
-<output wsam:Action="http://magazyn.azu.pk.edu.pl/Magazyn/zamowSurowiecResponse" message="tns:zamowSurowiecResponse"/>
+<operation name="umiescProdukt">
+<input wsam:Action="http://magazyn.azu.pk.edu.pl/Magazyn/umiescProduktRequest" message="tns:umiescProdukt"/>
+<output wsam:Action="http://magazyn.azu.pk.edu.pl/Magazyn/umiescProduktResponse" message="tns:umiescProduktResponse"/>
 </operation>
 <operation name="dodajSurowiec">
 <input wsam:Action="http://magazyn.azu.pk.edu.pl/Magazyn/dodajSurowiecRequest" message="tns:dodajSurowiec"/>
 <output wsam:Action="http://magazyn.azu.pk.edu.pl/Magazyn/dodajSurowiecResponse" message="tns:dodajSurowiecResponse"/>
 </operation>
+<operation name="wezSurowiec">
+<input wsam:Action="http://magazyn.azu.pk.edu.pl/Magazyn/wezSurowiecRequest" message="tns:wezSurowiec"/>
+<output wsam:Action="http://magazyn.azu.pk.edu.pl/Magazyn/wezSurowiecResponse" message="tns:wezSurowiecResponse"/>
+</operation>
 <operation name="uzyjForme">
 <input wsam:Action="http://magazyn.azu.pk.edu.pl/Magazyn/uzyjFormeRequest" message="tns:uzyjForme"/>
 <output wsam:Action="http://magazyn.azu.pk.edu.pl/Magazyn/uzyjFormeResponse" message="tns:uzyjFormeResponse"/>
 </operation>
-<operation name="umiescProdukt">
-<input wsam:Action="http://magazyn.azu.pk.edu.pl/Magazyn/umiescProduktRequest" message="tns:umiescProdukt"/>
-<output wsam:Action="http://magazyn.azu.pk.edu.pl/Magazyn/umiescProduktResponse" message="tns:umiescProduktResponse"/>
+<operation name="wezProdukt">
+<input wsam:Action="http://magazyn.azu.pk.edu.pl/Magazyn/wezProduktRequest" message="tns:wezProdukt"/>
+<output wsam:Action="http://magazyn.azu.pk.edu.pl/Magazyn/wezProduktResponse" message="tns:wezProduktResponse"/>
+</operation>
+<operation name="zamowSurowiec">
+<input wsam:Action="http://magazyn.azu.pk.edu.pl/Magazyn/zamowSurowiecRequest" message="tns:zamowSurowiec"/>
+<output wsam:Action="http://magazyn.azu.pk.edu.pl/Magazyn/zamowSurowiecResponse" message="tns:zamowSurowiecResponse"/>
 </operation>
 </portType>
 <binding name="MagazynPortBinding" type="tns:Magazyn">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="wezProdukt">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="wezSurowiec">
+<operation name="zwrocListeIDProduktow">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -115,16 +106,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="zwrocListeIDProduktow">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="zamowSurowiec">
+<operation name="umiescProdukt">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -142,6 +124,15 @@
 <soap:body use="literal"/>
 </output>
 </operation>
+<operation name="wezSurowiec">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="uzyjForme">
 <soap:operation soapAction=""/>
 <input>
@@ -151,7 +142,16 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="umiescProdukt">
+<operation name="wezProdukt">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="zamowSurowiec">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
