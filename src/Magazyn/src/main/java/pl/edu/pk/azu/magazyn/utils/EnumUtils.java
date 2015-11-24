@@ -11,4 +11,8 @@ public class EnumUtils {
     public static Stan intToStan(int stanAsInt) {
         return Stan.values()[stanAsInt];
     }
+
+    public static int idProjektuToInt(IdProjektu typ) {
+        return typ.ordinal();
+    }
 }
