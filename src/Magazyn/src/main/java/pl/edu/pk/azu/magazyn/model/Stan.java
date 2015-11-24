@@ -6,5 +6,6 @@ public enum Stan {
     POMALOWANY,
     DO_KONTROLI,
     GOTOWY,
-    ZEPSUTY
+    ZEPSUTY,
+    DO_RECYKLINGU
 }
