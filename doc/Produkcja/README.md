@@ -30,6 +30,7 @@ Rafa³ Leœniak
 | wykonajOdlew | ID\_Projektu | - | Brak materia³u na odlew |
 | szlifuj | ID\_Projektu | - | Brak czêœci do szlifowania |
 | Maluj | ID\_Projektu | - | Brak czêœci do malowania |
+| dodajZamowienia | iloscZamowien | - |
 
 ## 3. Powi¹zanie z innymi us³ugami
 
@@ -91,3 +92,13 @@ Skrót: U¿ytkownik wybiera czêœæ któr¹ chce pomalowaæ, podaj¹c ID\_Projektu jej o
 3. 3.Z magazynu pobierana jest dana czêœæ
 4. 4.Nastêpuje malowanie czêœci
 5. 5.Pomalowana czêœæ zostaje przeniesiona do magazynu
+
+### 5.5 Dodawanie zamówie¿
+
+Aktor: Klient
+
+Skrót: U¿ytkownik wybiera ilo¿¿ zamówie¿, które chce doda¿ do wyprodukowania
+
+1. 1.System udost¿pnia us¿ug¿ dodawania ilo¿ci zamówie¿ do wyprodukowania.
+2. 2.U¿ytownik wo¿a us¿ug¿ podaj¿c ilo¿¿ zamówie¿ do wyprodukowania.
+3. 3.Nast¿puje dodanie nowych zamówie¿ do licznika zamówie¿.
