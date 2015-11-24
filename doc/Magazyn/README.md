@@ -41,10 +41,10 @@ Usługi przyjmują inty które odpowiadają poszczególnym enumów
 | 0 | ODLANY |
 | 1 | OSZLIFOWANY |
 | 2 | POMALOWANY |
-| 3 | DOKONTROLI |
+| 3 | DO_KONTROLI |
 | 4 | GOTOWY |
 | 5 | ZEPSUTY |
-| 6 | DORECYKLINGU |
+| 6 | DO_RECYKLINGU |
 
 
 _IdProjektu_
