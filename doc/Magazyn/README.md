@@ -26,7 +26,9 @@
 * **Weź surowiec -** operacja wydaje ze stanu magazynu surowiec w zadanej ilości (ile).
 * **Zamów surowiec -** operacja wywoływana automatycznie w momencie alarmującej ilości surowca na stanie magazynu. 
     Wywoływana na spedycji. Nie powinna być wywoływania przez innego użytkownika niż magazyn.
-* **Zwróć listę produktów w stanie -** operacja zwraca **listę id** produktów, na stanie magazynu o zadanym stanie (stan).
+* **Zwróć listę produktów w stanie -** operacja zwraca **listę IdProjektu** projektów, na stanie magazynu o zadanym stanie.
+	Czyli dla stan = 5 (co odpowiada Stan.ZEPSUTY), zwróci lista = {0, 0, 1, 1, 4} co można tłumaczyć na:
+		{IdProjektu.KOLO, IdProjektu.KOLO, IdProjektu.SILNIK, IdProjektu.AUTO}
 
 ***MAPOWANIA INT <-> ENUMÓW***
 
