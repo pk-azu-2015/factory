@@ -44,6 +44,7 @@ Usługi przyjmują inty które odpowiadają poszczególnym enumów
 | 3 | DOKONTROLI |
 | 4 | GOTOWY |
 | 5 | ZEPSUTY |
+| 6 | DORECYKLINGU |
 
 
 _IdProjektu_
