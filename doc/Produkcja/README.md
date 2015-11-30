@@ -27,10 +27,10 @@ Rafa³ Leœniak
 | Operacja | Wejœcie | **Wyjœcie** | Wyj¹tki |
 | --- | --- | --- | --- |
 | wykonajForme | ID\_Projektu | ID\_Formy | Brak materia³u na formê |
-| wykonajOdlew | ID\_Projektu | - | Brak materia³u na odlew |
-| szlifuj | ID\_Projektu | - | Brak czêœci do szlifowania |
-| Maluj | ID\_Projektu | - | Brak czêœci do malowania |
-| dodajZamowienia | iloscZamowien | - |
+| wykonajOdlew | ID\_Projektu | boolean czySukces | Brak materia³u na odlew |
+| szlifuj | ID\_Projektu | boolean czySukces | Brak czêœci do szlifowania |
+| Maluj | ID\_Projektu | boolean czySukces | Brak czêœci do malowania |
+| dodajZamowienia | iloscZamowien | boolean czySukces |
 
 ## 3. Powi¹zanie z innymi us³ugami
 
@@ -68,6 +68,7 @@ Skrót: U¿ytkownik wybiera projekt dla którego chce wykonaæ odlew. Jest on tworzo
 3. 3.Z magazynu pobierany jest materia³ oraz utworzona forma.
 4. 4.W procesie produkcji tworzony jest odlew.
 5. 5.Utworzony odlew zostaje przeniesiony do magazynu.
+6. 6.U¿ytkownikowi zwracana jest warto¿¿ true.
 
 ### 5.3 Szlifowanie
 
@@ -80,6 +81,7 @@ Skrót: U¿ytkownik wybiera czêœæ któr¹ chce oszlifowaæ, podaj¹c ID\_Projektu jej 
 3. 3.Z magazynu pobierana jest dana czêœæ
 4. 4.Nastêpuje szlifowanie czêœci
 5. 5.Oszlifowana czêœæ zostaje przeniesiona do magazynu
+6. 6.U¿ytkownikowi zwracana jest warto¿¿ true.
 
 ### 5.4 Malowanie
 
@@ -92,6 +94,7 @@ Skrót: U¿ytkownik wybiera czêœæ któr¹ chce pomalowaæ, podaj¹c ID\_Projektu jej o
 3. 3.Z magazynu pobierana jest dana czêœæ
 4. 4.Nastêpuje malowanie czêœci
 5. 5.Pomalowana czêœæ zostaje przeniesiona do magazynu
+6. 6.U¿ytkownikowi zwracana jest warto¿¿ true.
 
 ### 5.5 Dodawanie zamówie¿
 
@@ -102,3 +105,5 @@ Skrót: U¿ytkownik wybiera ilo¿¿ zamówie¿, które chce doda¿ do wyprodukowania
 1. 1.System udost¿pnia us¿ug¿ dodawania ilo¿ci zamówie¿ do wyprodukowania.
 2. 2.U¿ytownik wo¿a us¿ug¿ podaj¿c ilo¿¿ zamówie¿ do wyprodukowania.
 3. 3.Nast¿puje dodanie nowych zamówie¿ do licznika zamówie¿.
+4. 4.U¿ytkownikowi zwracana jest warto¿¿ true.
+
