@@ -18,6 +18,11 @@ import pl.edu.pk.azu.magazyn.utils.ProjektFactory;
 @WebService(serviceName = "Magazyn")
 public class Magazyn {
 
+    /***
+     * The @Oneway annotation is placed on the methods in the SEI that will not require a response from the service.
+     * The runtime does not wait for a response and will not reserve any resource to process a response.
+     */
+
     FormaRepository formaRepository = FormaRepositoryFileImpl.getInstance();
     ProjektRepository projektRepository = ProjektRepositoryFileImpl.getInstance();
     SurowiecRepository surowiecRepository = SurowiecRepositoryFileImpl.getInstance();

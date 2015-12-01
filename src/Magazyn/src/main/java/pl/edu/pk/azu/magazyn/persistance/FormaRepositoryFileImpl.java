@@ -1,7 +1,9 @@
 package pl.edu.pk.azu.magazyn.persistance;
 
 import pl.edu.pk.azu.magazyn.exceptions.ItemUsed;
+import pl.edu.pk.azu.magazyn.exceptions.ItemUsedExceptionBean;
 import pl.edu.pk.azu.magazyn.exceptions.NoItemFound;
+import pl.edu.pk.azu.magazyn.exceptions.NoItemFoundExceptionBean;
 import pl.edu.pk.azu.magazyn.model.Forma;
 
 import java.util.HashMap;
@@ -56,12 +58,12 @@ public class FormaRepositoryFileImpl implements FormaRepository {
         AtomicInteger counterOfForm = formaCounter.get(forma);
 
         if(!isExist(counterOfForm)) {
-            throw new NoItemFound(forma.toString());
+            throw new NoItemFound(forma.toString(), new NoItemFoundExceptionBean(forma.toString()) );
         }
 
         int amountOfFormsAfterDecrementation = takeForm(counterOfForm);
         if (lessThanZero(amountOfFormsAfterDecrementation)) {
-            throw new NoItemFound(forma.toString());
+            throw new NoItemFound(forma.toString(),new NoItemFoundExceptionBean(forma.toString()));
         }
     }
 
@@ -73,10 +75,10 @@ public class FormaRepositoryFileImpl implements FormaRepository {
             if(isUsageOfFormLessThanMaxUsage(formaUsage)) {
                 useForm(formaUsage);
             } else {
-               throw new ItemUsed(forma.toString());
+               throw new ItemUsed(forma.toString(), new ItemUsedExceptionBean(forma.toString()));
             }
         } else {
-            throw new NoItemFound(forma.toString());
+            throw new NoItemFound(forma.toString(), new NoItemFoundExceptionBean(forma.toString()));
         }
     }
 
