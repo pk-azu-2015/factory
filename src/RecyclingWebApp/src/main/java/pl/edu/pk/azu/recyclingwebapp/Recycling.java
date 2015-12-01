@@ -26,6 +26,8 @@ public class Recycling {
 
     /**
      * This is a sample web service operation
+     * @param txt
+     * @return 
      */
     @WebMethod(operationName = "hello")
     public String hello(@WebParam(name = "name") String txt) {
@@ -55,7 +57,7 @@ public class Recycling {
                 int stan = 5;
                 // TODO process result here
                 pl.edu.pk.azu.magazyn.Projekt result = port.wezProdukt(idProjektu, stan);
-                System.out.println("Result = "+result);
+                System.out.println("Result = " + result);
             } catch (Exception ex) {
                 System.out.println("Brak konkretnego produkt do recyklingu");
             }

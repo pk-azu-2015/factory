@@ -99,7 +99,7 @@
                             <wsdlFiles>
                                 <wsdlFile>localhost_8080/Magazyn/Magazyn.wsdl</wsdlFile>
                             </wsdlFiles>
-                            <packageName>pl.edu.pk.azu.recyclingwebapp</packageName>
+                            <packageName></packageName>
                             <wsdlLocation>http://localhost:8080/Magazyn/Magazyn?wsdl</wsdlLocation>
                             <staleFile>${project.build.directory}/jaxws/stale/Magazyn.stale</staleFile>
                         </configuration>
