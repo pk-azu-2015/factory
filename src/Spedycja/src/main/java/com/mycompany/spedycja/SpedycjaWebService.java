@@ -5,9 +5,16 @@
  */
 package com.mycompany.spedycja;
 
-import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+import javax.jws.WebService;
+import javax.xml.ws.WebServiceRef;
+
+import pl.edu.pk.azu.magazyn.Magazyn;
+import pl.edu.pk.azu.magazyn.Magazyn_Service;
+import pl.edu.pk.azu.magazyn.NoItemFound_Exception;
+
+
 
 /**
  *
@@ -15,6 +22,9 @@ import javax.jws.WebParam;
  */
 @WebService(serviceName = "SpedycjaWebService")
 public class SpedycjaWebService {
+    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_17952/Magazyn/Magazyn.wsdl")
+    //private localhost._8080.magazyn.Magazyn_Service service;
+     private pl.edu.pk.azu.magazyn.Magazyn_Service service;
 
     /**
      * This is a sample web service operation
@@ -38,6 +48,17 @@ public class SpedycjaWebService {
     @WebMethod(operationName = "zamowSurowiec")
     public String zamowSurowiec(@WebParam(name = "ilosc") int ilosc) {
         
+        try { // Call Web Service Operation
+            localhost._8080.magazyn.Magazyn port = service.getMagazynPort();
+            // TODO initialize WS operation arguments here
+            ilosc = 0;
+            // TODO process result here
+            int result = port.dodajSurowiec(ilosc);
+            System.out.println("Result = "+result);
+        } catch (Exception ex) {
+            // TODO handle custom exceptions here
+        }
+
         return "zamowSurowiec " + ilosc + " !";
     }
         /**
