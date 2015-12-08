@@ -1,7 +1,6 @@
 package pl.edu.pk.azu.magazyn.persistance;
 
 import pl.edu.pk.azu.magazyn.exceptions.NoItemFound;
-import pl.edu.pk.azu.magazyn.exceptions.NoItemFoundExceptionBean;
 import pl.edu.pk.azu.magazyn.model.Projekt;
 import pl.edu.pk.azu.magazyn.model.Stan;
 import pl.edu.pk.azu.magazyn.utils.EnumUtils;
@@ -36,10 +35,10 @@ public class ProjektRepositoryFileImpl implements ProjektRepository {
         if (counterExists(counter)) {
             int projectCounterAfterDecrementation = takeProject(counter);
             if (lessThanZero(projectCounterAfterDecrementation)) {
-                throw new NoItemFound(projekt.toString(),new NoItemFoundExceptionBean(projekt.toString()));
+                throw new NoItemFound(projekt.toString());
             }
         } else {
-            throw new NoItemFound(projekt.toString(),new NoItemFoundExceptionBean(projekt.toString()));
+            throw new NoItemFound(projekt.toString());
         }
     }
 
