@@ -24,9 +24,9 @@ import pl.edu.pk.azu.magazyn.utils.ProjektFactory;
         parameterStyle = SOAPBinding.ParameterStyle.WRAPPED)
 public class Magazyn {
 
-    FormaRepository formaRepository = FormaRepositoryFileImpl.getInstance();
-    ProjektRepository projektRepository = ProjektRepositoryFileImpl.getInstance();
-    SurowiecRepository surowiecRepository = SurowiecRepositoryFileImpl.getInstance();
+    FormaRepository formaRepository = RepositoryFactory.newInstanceFormRepository();
+    ProjektRepository projektRepository = RepositoryFactory.newInstanceProjektRepository();
+    SurowiecRepository surowiecRepository = RepositoryFactory.newInstanceSurowiecRepository();
 
     @WebMethod(operationName = "dodajForme")
     public Forma dodajForme(@WebParam(name = "idProjektu") int idProjektu) {

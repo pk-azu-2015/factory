@@ -5,16 +5,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class SurowiecRepositoryFileImpl implements SurowiecRepository {
     private AtomicInteger atomicInteger;
 
-    private static SurowiecRepositoryFileImpl instance;
 
-    public static SurowiecRepositoryFileImpl getInstance() {
-        if(instance == null) {
-            instance = new SurowiecRepositoryFileImpl();
-        }
-        return instance;
-    }
-
-    private SurowiecRepositoryFileImpl() {
+    public SurowiecRepositoryFileImpl() {
         atomicInteger = new AtomicInteger();
     }
 

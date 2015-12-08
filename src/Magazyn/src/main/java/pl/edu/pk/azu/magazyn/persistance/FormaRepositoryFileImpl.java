@@ -13,16 +13,7 @@ public class FormaRepositoryFileImpl implements FormaRepository {
     private HashMap<Forma,AtomicInteger> formaCounter;
     private HashMap<Forma,AtomicInteger> formaUsageCounter;
 
-    private static FormaRepositoryFileImpl instance;
-
-    public static FormaRepositoryFileImpl getInstance() {
-        if(instance == null) {
-            instance = new FormaRepositoryFileImpl();
-        }
-        return instance;
-    }
-
-    private FormaRepositoryFileImpl() {
+    public FormaRepositoryFileImpl() {
         formaCounter = new HashMap<>();
         formaUsageCounter = new HashMap<>();
     }

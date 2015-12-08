@@ -15,16 +15,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class ProjektRepositoryFileImpl implements ProjektRepository {
     private HashMap<Projekt, AtomicInteger> projektyCounter;
 
-    private static ProjektRepositoryFileImpl instance;
 
-    public static ProjektRepositoryFileImpl getInstance() {
-        if (instance == null) {
-            instance = new ProjektRepositoryFileImpl();
-        }
-        return instance;
-    }
-
-    private ProjektRepositoryFileImpl() {
+    public ProjektRepositoryFileImpl() {
         projektyCounter = new HashMap<>();
     }
 
