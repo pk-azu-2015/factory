@@ -20,15 +20,25 @@ public class SpedycjaWebService {
      * This is a sample web service operation
      */
     @WebMethod(operationName = "przygotujSklep")
-    public String przygotujSklep(@WebParam(name = "name") String txt) {
-        return "przygotujSklep " + txt + " !";
+    public String przygotujSklep(@WebParam(name = "kod_produktu") long kod_produktu,
+            @WebParam(name = "ilosc") int ilosc) {
+        return "przygotujSklep ";
     }
         /**
      * This is a sample web service operation
      */
     @WebMethod(operationName = "przygotujNaprawe")
-    public String przygotujNaprawe(@WebParam(name = "name") String txt) {
-        return "przygotujNaprawe " + txt + " !";
+    public String przygotujNaprawe(@WebParam(name = "kod_produktu") long kod_produktu,
+            @WebParam(name = "ilosc") int ilosc) {
+        return "przygotujNaprawe";
+    }
+        /**
+     * This is a sample web service operation
+     */
+    @WebMethod(operationName = "zamowSurowiec")
+    public String zamowSurowiec(@WebParam(name = "ilosc") int ilosc) {
+        
+        return "zamowSurowiec " + ilosc + " !";
     }
         /**
      * This is a sample web service operation

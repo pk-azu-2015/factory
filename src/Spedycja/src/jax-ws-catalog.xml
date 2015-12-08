@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://localhost:8080/Factory/Factory?wsdl" uri="wsdl/localhost_8080/Factory/Factory.wsdl"/>
+    <system systemId="http://localhost:8080/Factory/Factory?xsd=1" uri="wsdl/localhost_8080/Factory/Factory.xsd_1.xsd"/>
+    <system systemId="file:/C:/Users/student/Documents/NetBeansProjects/azu/factory/src/Factory/src/wsdl/localhost_17952/Magazyn/Magazyn.wsdl" uri="wsdl/Magazyn.wsdl"/>
+</catalog>
