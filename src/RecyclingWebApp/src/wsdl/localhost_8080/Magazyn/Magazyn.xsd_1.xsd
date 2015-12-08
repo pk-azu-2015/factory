@@ -139,6 +139,7 @@
 <xs:enumeration value="DO_KONTROLI"/>
 <xs:enumeration value="GOTOWY"/>
 <xs:enumeration value="ZEPSUTY"/>
+<xs:enumeration value="DO_RECYKLINGU"/>
 </xs:restriction>
 </xs:simpleType>
 
