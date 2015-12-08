@@ -18,17 +18,17 @@ Powiązania zawarte są w operacjach „naprawProdukt” (powiązanie z Magazyne
 
 ###Diagramy:
 **Diagram klas:**
-
 ![alt text](http://funkyimg.com/i/24T2q.png "Diagram klas usługi Naprawa")
 
-**[out of date] Diagram przypadków użycia:**
-![alt text](http://funkyimg.com/i/23Qy4.png "Diagram przypadków użycia")
+**Diagram przypadków użycia:**
+![alt text](http://funkyimg.com/i/25hnc.png "Diagram przypadków użycia")
 
-**Diagram powiązania z usługami Magazynu:**
+[out of date]**Diagram powiązania z usługami Magazynu:**
 ![alt text](http://funkyimg.com/i/243LU.jpg "Diagram powiązania z Magazynem")
 
 ```
 changelog :
+2015-12-08: Uaktualnienie diagramu przypadków użycia.
 2015-11-24: Uaktualnienie diagramu klas.
 2015-11-17: Hosting uslugi + dodanie adresu.
 2015-11-17: Uaktualnienie opisu.
