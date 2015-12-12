@@ -9,8 +9,6 @@ public interface FormaRepository {
 
     void dodajForme(Forma forma);
 
-    void wezForme(Forma forma) throws NoItemFound;
-
     void uzyjForme(Forma forma) throws  NoItemFound, ItemUsed;
 
 }

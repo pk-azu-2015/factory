@@ -41,7 +41,7 @@ public class FormaRepositoryFileImpl implements FormaRepository {
             formaUsageCounter.put(forma, usageCounter);
         }
     }
-
+/*
     @Override
     public void wezForme(Forma forma) throws NoItemFound {
         AtomicInteger counterOfForm = formaCounter.get(forma);
@@ -55,7 +55,7 @@ public class FormaRepositoryFileImpl implements FormaRepository {
             throw new NoItemFound(forma.toString());
         }
     }
-
+*/
     @Override
     public void uzyjForme(Forma forma) throws NoItemFound, ItemUsed {
         AtomicInteger formaUsage = formaUsageCounter.get(forma);

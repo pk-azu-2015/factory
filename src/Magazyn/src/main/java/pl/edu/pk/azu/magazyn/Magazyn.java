@@ -5,6 +5,7 @@ import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.soap.SOAPBinding;
+import pl.edu.pk.azu.magazyn.exceptions.ItemUsed;
 
 import pl.edu.pk.azu.magazyn.exceptions.NoItemFound;
 import pl.edu.pk.azu.magazyn.model.Forma;
@@ -35,11 +36,13 @@ public class Magazyn {
         return forma;
     }
 
-//    @WebMethod(operationName = "uzyjForme")
-//    public Forma uzyjForme(@WebParam(name = "idProjektu") int idProjektu) {
-//        return null;
-//
-//    }
+    @WebMethod(operationName = "uzyjForme")
+    public Forma uzyjForme(@WebParam(name = "idProjektu") int idProjektu) throws NoItemFound, ItemUsed {
+        Forma forma = FormaFactory.createForma(idProjektu);
+        formaRepository.uzyjForme(forma);
+        return forma;
+
+    }
 
     @WebMethod(operationName = "umiescProdukt")
     public Projekt umiescProdukt(@WebParam(name = "idProjektu") int idProjektu,

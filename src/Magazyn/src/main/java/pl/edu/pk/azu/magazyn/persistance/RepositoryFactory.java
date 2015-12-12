@@ -10,7 +10,7 @@ public class RepositoryFactory {
 
     public static FormaRepository newInstanceFormRepository() {
         if(formaRepository == null) {
-            formaRepository = new FormaRepositoryFileImpl();
+            formaRepository = new FormaRepositoryDBImpl();
         }
         return formaRepository;
     }
@@ -18,14 +18,14 @@ public class RepositoryFactory {
 
     public static ProjektRepository newInstanceProjektRepository() {
         if (projektRepository == null) {
-            projektRepository = new ProjektRepositoryFileImpl();
+            projektRepository = new ProjektRepositoryDBImpl();
         }
         return projektRepository;
     }
 
     public static SurowiecRepository newInstanceSurowiecRepository() {
         if(surowiecRepository == null) {
-            surowiecRepository = new SurowiecRepositoryFileImpl();
+            surowiecRepository = new SurowiecRepositoryDBImpl();
         }
         return surowiecRepository;
     }
