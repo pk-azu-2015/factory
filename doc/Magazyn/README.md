@@ -10,16 +10,16 @@
 | -------- | :-----: | :-----: | ------: | 
 | Dodaj forme | idProjektu:int | void | - |
 | Użyj forme | idProjektu:int | void | 404 |
-| Umieść produkt | idProjektu:int, idStanu:int | void | - |
-| Weź produkt | idProjektu:int, idStanu:int | Produkt | 404 |
+| Dodaj projekt | idProjektu:int, idStanu:int | void | - |
+| Weź projekt | idProjektu:int, idStanu:int | void | 404 |
 | Weź surowiec | ilosc:int | void | - |
-| Zamów surowiec | void | void | - |
+| Pobierz surowiec | ilosc:int | void | - |
 | Dodaj surowiec | ilosc:int | void  | - |
 | Zwróć listę produktów w stanie | idStanu:int | List<id:int> | - |
 
 ***Opis***
 
-* **Dodaj forme -** operacja odpowiada za dodanie formy danego typu(idProjektu), na stan magazynu. 
+* **Dodaj forme -** operacja odpowiada za dodanie formy danego typu(idProjektu), na stan magazynu.  
 * **Użyj forme -**  operacja odpowiada za użycie formy, danego typu(idProjektu). Każdą formę można użyć 10 razy.
 * **Umieść produkt -** operacja dodaje na stan magazynu produkt (idProjektu) w danym stanie (stan).
 * **Weź produkt -** operacja wydaje ze stanu magazynu produkt (idProjektu) w danym stanie (stan).
@@ -28,7 +28,7 @@
     Wywoływana na spedycji. Nie powinna być wywoływania przez innego użytkownika niż magazyn.
 * **Zwróć listę produktów w stanie -** operacja zwraca **listę IdProjektu** projektów, na stanie magazynu o zadanym stanie.
 	Czyli dla stan = 5 (co odpowiada Stan.ZEPSUTY), zwróci lista = {0, 0, 1, 1, 4} co można tłumaczyć na:
-		{IdProjektu.KOLO, IdProjektu.KOLO, IdProjektu.SILNIK, IdProjektu.AUTO}
+		{IdProjektu.KOLO, IdProjektu.KOLO, IdProjektu.SILNIK, IdProjektu.SILNIK, IdProjektu.KAROSERIA}
 
 ***MAPOWANIA INT <-> ENUMÓW***
 
