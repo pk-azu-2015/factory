@@ -89,6 +89,9 @@ public class Factory {
     @WebMethod(operationName = "zlozZamowienie")
     public boolean zlozZamowienie(@WebParam(name = "ilosc") int iloscZamowionych) throws IOException {
         int stanPoczatkowy = wczytajStanPoczatkowy();
+        if (stanPoczatkowy == -1) {
+            return false;
+        }
         System.out.println("stanPoczatkowy: " + stanPoczatkowy);
         return zapiszIlosc(stanPoczatkowy + iloscZamowionych);
     }
@@ -105,15 +108,16 @@ public class Factory {
 
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(Factory.class.getName()).log(Level.SEVERE, null, ex);
-                return 0;
+                return -1;
             } catch (IOException ex) {
                 Logger.getLogger(Factory.class.getName()).log(Level.SEVERE, null, ex);
-                return 0;
+                return -1;
             } finally {
                 try {
                     br.close();
                 } catch (IOException ex) {
                     Logger.getLogger(Factory.class.getName()).log(Level.SEVERE, null, ex);
+                return -1;
                 }
             }
         }
@@ -132,6 +136,12 @@ public class Factory {
             return false;
         }
     }
+    
+    @WebMethod(operationName = "czytajIloscZamowien")
+    public int czytajIloscZamowien() {
+        return wczytajStanPoczatkowy();
+    }
+    
     public static class EnumUtils {
         public static IdProjektu intToIdProjektu(int idAsInt) {
             return IdProjektu.values()[idAsInt];
