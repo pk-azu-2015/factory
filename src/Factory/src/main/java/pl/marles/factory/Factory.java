@@ -109,7 +109,8 @@ public class Factory {
         return stanPoczatkowy;
     }
 
-    private boolean zapiszIlosc(int nowaIlosc) {
+    @WebMethod(operationName = "zapiszIlosc")
+    public boolean zapiszIlosc(@WebParam(name = "nowaIlosc") int nowaIlosc) {
         try {
             PrintWriter zapis = null;
             zapis = new PrintWriter(NAZWA_PLIKU);
