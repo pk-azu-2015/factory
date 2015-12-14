@@ -14,15 +14,16 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.xml.ws.WebServiceRef;
-import pl.edu.pk.azu.magazyn.IdProjektu;
-import pl.edu.pk.azu.magazyn.Magazyn;
-import pl.edu.pk.azu.magazyn.Magazyn_Service;
-import pl.edu.pk.azu.magazyn.NoItemFound_Exception;
-import pl.edu.pk.azu.magazyn.Stan;
+import localhost._8080.magazyn.IdProjektu;
+import localhost._8080.magazyn.ItemUsed_Exception;
+import localhost._8080.magazyn.Magazyn;
+import localhost._8080.magazyn.Magazyn_Service;
+import localhost._8080.magazyn.NoItemFound_Exception;
+import localhost._8080.magazyn.Stan;
 
 @WebService(serviceName = "Factory")
 public class Factory {
-    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_17952/Magazyn/Magazyn.wsdl")
+    @WebServiceRef(wsdlLocation = "http://localhost:8080/Magazyn/Magazyn?wsdl")
     private Magazyn_Service service;
     
     private final String NAZWA_PLIKU = "zamowienia.txt";
@@ -43,7 +44,15 @@ public class Factory {
     @WebMethod(operationName = "wykonajOdlew")
     public boolean wykonajOdlew(@WebParam(name = "ID_Projektu") int idProjekt) {
         Magazyn magazyn = service.getMagazynPort();
-        magazyn.uzyjForme(idProjekt);
+        try {
+            magazyn.uzyjForme(idProjekt);
+        } catch (ItemUsed_Exception ex) {
+            Logger.getLogger(Factory.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        } catch (NoItemFound_Exception ex) {
+            Logger.getLogger(Factory.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
         magazyn.umiescProdukt(idProjekt, EnumUtils.stanToInt(Stan.ODLANY));
         return true;
     }

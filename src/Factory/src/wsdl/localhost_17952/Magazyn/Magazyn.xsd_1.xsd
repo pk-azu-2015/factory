@@ -1,4 +1,6 @@
-<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.1-b419 (branches/2.3.1.x-7937; 2014-08-04T08:11:03+0000) JAXWS-RI/2.2.10-b140803.1500 JAXWS-API/2.2.11 JAXB-RI/2.2.10-b140802.1033 JAXB-API/2.2.12-b140109.1041 svn-revision#unknown. --><xs:schema xmlns:tns="http://magazyn.azu.pk.edu.pl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://magazyn.azu.pk.edu.pl/">
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown. --><xs:schema xmlns:tns="http://localhost:8080/Magazyn/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://localhost:8080/Magazyn/">
+
+<xs:element name="ItemUsed" type="tns:ItemUsed"/>
 
 <xs:element name="NoItemFound" type="tns:NoItemFound"/>
 
@@ -26,13 +28,29 @@
 
 <xs:element name="wezSurowiecResponse" type="tns:wezSurowiecResponse"/>
 
-<xs:element name="zamowSurowiec" type="tns:zamowSurowiec"/>
-
-<xs:element name="zamowSurowiecResponse" type="tns:zamowSurowiecResponse"/>
-
 <xs:element name="zwrocListeIDProduktow" type="tns:zwrocListeIDProduktow"/>
 
 <xs:element name="zwrocListeIDProduktowResponse" type="tns:zwrocListeIDProduktowResponse"/>
+
+<xs:complexType name="umiescProdukt">
+<xs:sequence>
+<xs:element name="idProjektu" type="xs:int"/>
+<xs:element name="stan" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="umiescProduktResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:projekt" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="projekt">
+<xs:sequence>
+<xs:element name="stan" type="tns:stan" minOccurs="0"/>
+<xs:element name="typ" type="tns:idProjektu" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
 
 <xs:complexType name="wezSurowiec">
 <xs:sequence>
@@ -41,7 +59,9 @@
 </xs:complexType>
 
 <xs:complexType name="wezSurowiecResponse">
-<xs:sequence/>
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="zwrocListeIDProduktow">
@@ -56,14 +76,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="zamowSurowiec">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="zamowSurowiecResponse">
-<xs:sequence/>
-</xs:complexType>
-
 <xs:complexType name="wezProdukt">
 <xs:sequence>
 <xs:element name="idProjektu" type="xs:int"/>
@@ -74,13 +86,6 @@
 <xs:complexType name="wezProduktResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:projekt" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="projekt">
-<xs:sequence>
-<xs:element name="stan" type="tns:stan" minOccurs="0"/>
-<xs:element name="typ" type="tns:idProjektu" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -97,18 +102,21 @@
 </xs:complexType>
 
 <xs:complexType name="uzyjFormeResponse">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="umiescProdukt">
 <xs:sequence>
-<xs:element name="idProjektu" type="xs:int"/>
-<xs:element name="stan" type="xs:int"/>
+<xs:element name="return" type="tns:forma" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="umiescProduktResponse">
-<xs:sequence/>
+<xs:complexType name="forma">
+<xs:sequence>
+<xs:element name="typ" type="tns:idProjektu" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ItemUsed">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0"/>
+</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="dodajForme">
@@ -118,7 +126,9 @@
 </xs:complexType>
 
 <xs:complexType name="dodajFormeResponse">
-<xs:sequence/>
+<xs:sequence>
+<xs:element name="return" type="tns:forma" minOccurs="0"/>
+</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="dodajSurowiec">
@@ -128,7 +138,9 @@
 </xs:complexType>
 
 <xs:complexType name="dodajSurowiecResponse">
-<xs:sequence/>
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
 </xs:complexType>
 
 <xs:simpleType name="stan">
