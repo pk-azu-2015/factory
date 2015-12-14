@@ -14,12 +14,13 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.xml.ws.WebServiceRef;
-import localhost._8080.magazyn.IdProjektu;
-import localhost._8080.magazyn.ItemUsed_Exception;
-import localhost._8080.magazyn.Magazyn;
-import localhost._8080.magazyn.Magazyn_Service;
-import localhost._8080.magazyn.NoItemFound_Exception;
-import localhost._8080.magazyn.Stan;
+import wsdl.classes.IdProjektu;
+import wsdl.classes.ItemUsed_Exception;
+import wsdl.classes.Magazyn;
+import wsdl.classes.Magazyn_Service;
+import wsdl.classes.NoItemFound_Exception;
+import wsdl.classes.Stan;
+
 
 @WebService(serviceName = "Factory")
 public class Factory {
