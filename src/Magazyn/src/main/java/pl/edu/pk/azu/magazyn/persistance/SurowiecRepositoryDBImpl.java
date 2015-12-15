@@ -9,9 +9,9 @@ import java.util.logging.Logger;
 
 public class SurowiecRepositoryDBImpl implements SurowiecRepository{
 
-    static final String tableName = "surowiec";
-    Connection connection = null;
-    ResultSet resultSet = null;
+    private static final String tableName = "surowiec";
+    private Connection connection = null;
+    private ResultSet resultSet = null;
     
     public SurowiecRepositoryDBImpl() {
         connection = MySqlConnectionFactory.getConnection();
@@ -64,6 +64,16 @@ public class SurowiecRepositoryDBImpl implements SurowiecRepository{
             }
         } catch (SQLException ex) {
             Logger.getLogger(FormaRepositoryDBImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public int aktualnyStan() {
+        try {
+            return getCounter();
+        } catch (SQLException ex) {
+            Logger.getLogger(FormaRepositoryDBImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return -1;
         }
     }
 }

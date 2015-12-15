@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>pl.edu.pk.azu</groupId>
@@ -12,8 +13,9 @@
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <SEI>pl.edu.pk.azu.magazyn.Magazyn</SEI>
     </properties>
-    
+
     <dependencies>
         <dependency>
             <groupId>org.glassfish.metro</groupId>
@@ -36,6 +38,7 @@
 
     <build>
         <plugins>
+            <!--Kompilacja-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -48,6 +51,7 @@
                     </compilerArguments>
                 </configuration>
             </plugin>
+            <!--Budowanie WAR'a-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
@@ -56,6 +60,7 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
+            <!--Kopiowanie Libek-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -81,6 +86,30 @@
                     </execution>
                 </executions>
             </plugin>
+            <!--BUDOWANIE WSDL'a -->
+            <plugin>
+                <groupId>org.jvnet.jax-ws-commons</groupId>
+                <artifactId>jaxws-maven-plugin</artifactId>
+                <version>2.3</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>wsgen</goal>
+                        </goals>
+                        <configuration>
+                            <destDir>${project.basedir}/wsdl</destDir>
+                            <resourceDestDir>${project.basedir}/wsdl</resourceDestDir>
+                            <genWsdl>true</genWsdl>
+                            <keep>false</keep>
+                            <sei>${SEI}</sei>
+                            <verbose>true</verbose>
+                        </configuration>
+                    </execution>
+                </executions>
+
+            </plugin>
+            <!--Kopiowanie WSDL'a ze Spedycji-->
+
         </plugins>
     </build>
 

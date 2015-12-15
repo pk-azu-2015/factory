@@ -22,4 +22,9 @@ public class SurowiecRepositoryFileImpl implements SurowiecRepository {
         }
     }
 
+    @Override
+    public int aktualnyStan() {
+        return atomicInteger.get();
+    }
+
 }

@@ -1,6 +1,7 @@
 package pl.edu.pk.azu.magazyn;
 
 import java.util.List;
+import javax.jws.Oneway;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -61,18 +62,20 @@ public class Magazyn {
 
     }
 
-
+    @Oneway
     @WebMethod(operationName = "wezSurowiec")
-    public String wezSurowiec(@WebParam(name = "ilosc") int ilosc) {
+    public void wezSurowiec(@WebParam(name = "ilosc") int ilosc) {
         surowiecRepository.pobierzSurowiec(ilosc);
-        return "";
+        int aktualnyStan = surowiecRepository.aktualnyStan();
+        if(aktualnyStan < surowiecRepository.CRITICAL_LEVEL) {
+            zamowSurowiec();
+        }
     }
 
-//
-//    @WebMethod//(operationName = "zamowSurowiec")
-//    public void zamowSurowiec() {
-//        //TODO: Połączenie ze spedycją
-//    }
+
+    private void zamowSurowiec() {
+        //TODO: Połączenie ze spedycją
+    }
 
     @WebMethod(operationName = "dodajSurowiec")
     public int dodajSurowiec(@WebParam(name = "ilosc") int ilosc) {

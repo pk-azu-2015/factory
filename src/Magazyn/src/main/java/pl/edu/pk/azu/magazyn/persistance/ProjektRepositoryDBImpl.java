@@ -16,9 +16,9 @@ import pl.edu.pk.azu.magazyn.model.IdProjektu;
 
 public class ProjektRepositoryDBImpl implements ProjektRepository {
 
-    static final String tableName = "projekt";
-    Connection connection = null;
-    ResultSet resultSet = null;
+    private static final String tableName = "projekt";
+    private Connection connection = null;
+    private ResultSet resultSet = null;
     
     public ProjektRepositoryDBImpl() {
         connection = MySqlConnectionFactory.getConnection();
