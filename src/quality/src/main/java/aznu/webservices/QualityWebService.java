@@ -32,11 +32,11 @@ public class QualityWebService {
         Norma norma = Norma.getEnum(nazwaNormy);
         try { // Call Web Service Operation
             localhost._8080.magazyn.Magazyn port = service.getMagazynPort();
-            java.util.List<java.lang.Integer> productIdList = port.zwrocListeIDProduktow(Stan.DO_KONTROLI.getStanId());
+            java.util.List<java.lang.Integer> productIdList = port.zwrocListeIDProduktow(Stan.POMALOWANY.getStanId());
             
             if(productIdList != null){
                 for(Integer productId : productIdList ){
-                    Projekt projekt = port.wezProdukt(productId, Stan.DO_KONTROLI.getStanId());
+                    Projekt projekt = port.wezProdukt(productId, Stan.POMALOWANY.getStanId());
                     norma.sprawdzProdukt(projekt);
                 }
             }
