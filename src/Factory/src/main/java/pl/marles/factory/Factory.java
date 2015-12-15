@@ -40,6 +40,7 @@ public class Factory {
             
             magazyn.dodajForme(idProjektu);
         } catch (Exception ex) {
+            return -1;
         }
         return idProjektu;
     }
