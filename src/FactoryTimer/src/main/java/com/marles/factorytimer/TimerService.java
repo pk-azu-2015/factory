@@ -9,7 +9,7 @@ import javax.ejb.EJB;
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
 import javax.xml.ws.WebServiceRef;
-
+import wsdl.classes.Factory_Service;
 /**
  *
  * @author Marzec
@@ -17,11 +17,10 @@ import javax.xml.ws.WebServiceRef;
 @Singleton
 public class TimerService {
     
-//     @WebServiceRef(wsdlLocation="http://localhost:8080/Factory/Factory?wsdl")
-//    FactoryService factoryService;
+     @WebServiceRef(wsdlLocation="http://localhost:8080/Factory/Factory?wsdl")
+    Factory_Service factoryService;
   
     @Schedule(second = "*/1", minute="*", hour="*", persistent=false)
     public void doWork(){
-        System.out.println("timer: ");
     }
 }

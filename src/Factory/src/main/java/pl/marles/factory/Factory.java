@@ -22,7 +22,9 @@ import wsdl.classes.NoItemFound_Exception;
 import wsdl.classes.Stan;
 
 
-@WebService(serviceName = "Factory")
+@WebService(serviceName = "Factory",
+        targetNamespace = "http://localhost:8080/Factory/",
+        portName = "FactoryPort")
 public class Factory {
     @WebServiceRef(wsdlLocation = "http://localhost:8080/Magazyn/Magazyn?wsdl")
     private Magazyn_Service service;
@@ -124,7 +126,8 @@ public class Factory {
         return stanPoczatkowy;
     }
 
-    private boolean zapiszIlosc(int nowaIlosc) {
+    @WebMethod(operationName = "zapiszIlosc")
+    public boolean zapiszIlosc(int nowaIlosc) {
         try {
             PrintWriter zapis = null;
             zapis = new PrintWriter(NAZWA_PLIKU);
