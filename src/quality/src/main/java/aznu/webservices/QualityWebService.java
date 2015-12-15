@@ -12,6 +12,7 @@ import javax.jws.WebParam;
 import javax.xml.ws.WebServiceRef;
 import localhost._8080.magazyn.Magazyn;
 import localhost._8080.magazyn.Magazyn_Service;
+import localhost._8080.magazyn.Projekt;
 
 /**
  *
@@ -27,17 +28,19 @@ public class QualityWebService {
      * This is a sample web service operation
      */
     @WebMethod(operationName = "sprawdzStan")
-    public String sprawdzStan(@WebParam(name = "name") Norma norma) {        
+    public String sprawdzStan(@WebParam(name = "name") String nazwaNormy){          
+        Norma norma = Norma.getEnum(nazwaNormy);
         try { // Call Web Service Operation
             localhost._8080.magazyn.Magazyn port = service.getMagazynPort();
             java.util.List<java.lang.Integer> productIdList = port.zwrocListeIDProduktow(Stan.DO_KONTROLI.getStanId());
             
             if(productIdList != null){
                 for(Integer productId : productIdList ){
-                    port.wezProdukt(productId, Stan.DO_KONTROLI.getStanId());
+                    Projekt projekt = port.wezProdukt(productId, Stan.DO_KONTROLI.getStanId());
+                    norma.sprawdzProdukt(projekt);
                 }
             }
-            return "Hello " + norma + " !" + String.join(",",productIdList.toString());
+            return norma + " !" + String.join(",",productIdList.toString());
         } catch (Exception ex) {
             return "ERROR connecting with Magazyn Service";
         }

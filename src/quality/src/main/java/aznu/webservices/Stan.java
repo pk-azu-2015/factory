@@ -7,7 +7,7 @@ package aznu.webservices;
 
 /**
  *
- * @author root
+ * @author marcin
  */
 public enum Stan {
     ODLANY(0),
@@ -22,6 +22,15 @@ public enum Stan {
     
     Stan(Integer stan){
       this.stanId = stan;
+    }
+    
+    public static Stan fromMagazynStan(localhost._8080.magazyn.Stan stan){
+        for(Stan value : values()){
+            if(value.name().equals(stan.value())){
+                return value;
+            } 
+        }
+        return null;
     }
     
     public static Stan fromInt(Integer fromInt){

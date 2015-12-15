@@ -1,4 +1,5 @@
 
+import aznu.webservices.Norma;
 import aznu.webservices.Stan;
 
 /*
@@ -16,8 +17,7 @@ public class Main {
     public static void main(String[] args){
         System.out.println(Stan.fromInt(1));
                 System.out.println(Stan.fromInt(10));
-
-                        System.out.println(Stan.fromInt(null));
+            
 
     }
     

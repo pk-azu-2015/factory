@@ -5,6 +5,10 @@
  */
 package aznu.webservices;
 
+import static aznu.webservices.Stan.values;
+import java.util.Random;
+import localhost._8080.magazyn.Projekt;
+
 /**
  *
  * @author root
@@ -12,6 +16,23 @@ package aznu.webservices;
 public enum Norma {
     EU_99,
     PL_80,
-    EU_90
+    EU_90;
+    
+   
+    public static Norma getEnum(String value){
+        for(Norma norma : values()){
+            if(norma.name().equals(value)){
+                return norma;
+            } 
+        }
+        return null;
+    }
+    
+    public Stan sprawdzProdukt(Projekt productId){
+        Stan pokontroli = Stan.values()[new Random().nextInt(Stan.values().length)];
+//        productId.setStan(EnumUtils)
+                
+        return pokontroli;
+    }
     
 }
