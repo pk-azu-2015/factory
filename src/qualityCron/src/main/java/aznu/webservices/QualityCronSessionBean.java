@@ -20,16 +20,17 @@ public class QualityCronSessionBean {
     @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/quality/QualityWebService.wsdl")
     private QualityWebService_Service service;
 
-    @Schedule(dayOfWeek = "Mon-Fri", month = "*", hour = "9-17", dayOfMonth = "*", year = "*", minute = "*", second = "0", persistent = false)
+    @Schedule(dayOfWeek = "*", month = "*", hour = "*", dayOfMonth = "*", year = "*", minute = "*", second = "*/5", persistent = false)
     
     public void execute() {
         try { // Call Web Service Operation
             aznu.webservices.QualityWebService port = service.getQualityWebServicePort();
-
-            for(Norma norma : Norma.values()){
+               Norma norma = Norma.EU_99;
+//            for(Norma norma : Norma.values()){
+                System.out.println(norma.name());
                 java.lang.String result = port.sprawdzStan(norma.name());
                 System.out.println("Result = "+result);
-            }
+//            }
         } catch (Exception ex) {
         }
 
