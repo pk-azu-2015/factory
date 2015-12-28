@@ -5,12 +5,18 @@
  */
 package com.marles.factorytimer;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
 import javax.xml.ws.WebServiceRef;
 import wsdl.classes.Factory;
 import wsdl.classes.Factory_Service;
+import wsdl.classes.Magazyn;
+import wsdl.classes.Magazyn_Service;
+import wsdl.classes.Stan;
+import wsdl.classes.IdProjektu;
 /**
  *
  * @author Marzec
@@ -20,10 +26,14 @@ public class TimerService {
     
      @WebServiceRef(wsdlLocation="http://localhost:8080/Factory/Factory?wsdl")
     Factory_Service factoryService;
+     
+    @WebServiceRef(wsdlLocation="http://localhost:8080/Magazyn/Magazyn?wsdl")
+    Magazyn_Service magazynService;
   
     @Schedule(minute="*/5", hour="*", persistent=false)
     public void doWork(){
          Factory factoryPort = factoryService.getFactoryPort();
+         Logger logger = Logger.getLogger(Factory.class.getName());
          int iloscZamowien = factoryPort.czytajIloscZamowien();
          if (iloscZamowien < 0) {
              return;
@@ -35,10 +45,15 @@ public class TimerService {
          parts[2] = wykonajProjekt(factoryPort, IdProjektu.KOLO);
          parts[3] = wykonajProjekt(factoryPort, IdProjektu.PILOT);
          if (wszystkoTrue(parts)) {
-            System.out.println("Wykonano wszystkie czesci");
-//         wykonajProjekt(factoryPort, IdProjektu.AUTO);
+            logger.log(Level.INFO, "Wykonano wszystkie częsći");
          } else {
-             System.out.println("Bład wykonania");
+            logger.log(Level.INFO, "Wykonano nie wszystkie częsći");
+         }
+         if (factoryPort.zlozSamochod()) {
+            logger.log(Level.INFO, "Wykonano jeden samochodzik");
+             factoryPort.zapiszIlosc(iloscZamowien - 1);
+         } else {
+            logger.log(Level.INFO, "Nie wykonano żadnego samochodzika");
          }
     }
 
