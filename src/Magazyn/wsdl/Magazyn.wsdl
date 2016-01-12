@@ -12,14 +12,23 @@
   <message name="dodajFormeResponse">
     <part name="parameters" element="tns:dodajFormeResponse"/>
   </message>
+  <message name="wezProdukt">
+    <part name="parameters" element="tns:wezProdukt"/>
+  </message>
+  <message name="wezProduktResponse">
+    <part name="parameters" element="tns:wezProduktResponse"/>
+  </message>
+  <message name="NoItemFound">
+    <part name="fault" element="tns:NoItemFound"/>
+  </message>
+  <message name="wezSurowiec">
+    <part name="parameters" element="tns:wezSurowiec"/>
+  </message>
   <message name="uzyjForme">
     <part name="parameters" element="tns:uzyjForme"/>
   </message>
   <message name="uzyjFormeResponse">
     <part name="parameters" element="tns:uzyjFormeResponse"/>
-  </message>
-  <message name="NoItemFound">
-    <part name="fault" element="tns:NoItemFound"/>
   </message>
   <message name="ItemUsed">
     <part name="fault" element="tns:ItemUsed"/>
@@ -29,15 +38,6 @@
   </message>
   <message name="umiescProduktResponse">
     <part name="parameters" element="tns:umiescProduktResponse"/>
-  </message>
-  <message name="wezProdukt">
-    <part name="parameters" element="tns:wezProdukt"/>
-  </message>
-  <message name="wezProduktResponse">
-    <part name="parameters" element="tns:wezProduktResponse"/>
-  </message>
-  <message name="wezSurowiec">
-    <part name="parameters" element="tns:wezSurowiec"/>
   </message>
   <message name="dodajSurowiec">
     <part name="parameters" element="tns:dodajSurowiec"/>
@@ -56,6 +56,14 @@
       <input wsam:Action="http://localhost:8080/Magazyn/Magazyn/dodajFormeRequest" message="tns:dodajForme"/>
       <output wsam:Action="http://localhost:8080/Magazyn/Magazyn/dodajFormeResponse" message="tns:dodajFormeResponse"/>
     </operation>
+    <operation name="wezProdukt">
+      <input wsam:Action="http://localhost:8080/Magazyn/Magazyn/wezProduktRequest" message="tns:wezProdukt"/>
+      <output wsam:Action="http://localhost:8080/Magazyn/Magazyn/wezProduktResponse" message="tns:wezProduktResponse"/>
+      <fault message="tns:NoItemFound" name="NoItemFound" wsam:Action="http://localhost:8080/Magazyn/Magazyn/wezProdukt/Fault/NoItemFound"/>
+    </operation>
+    <operation name="wezSurowiec">
+      <input wsam:Action="http://localhost:8080/Magazyn/Magazyn/wezSurowiec" message="tns:wezSurowiec"/>
+    </operation>
     <operation name="uzyjForme">
       <input wsam:Action="http://localhost:8080/Magazyn/Magazyn/uzyjFormeRequest" message="tns:uzyjForme"/>
       <output wsam:Action="http://localhost:8080/Magazyn/Magazyn/uzyjFormeResponse" message="tns:uzyjFormeResponse"/>
@@ -65,14 +73,6 @@
     <operation name="umiescProdukt">
       <input wsam:Action="http://localhost:8080/Magazyn/Magazyn/umiescProduktRequest" message="tns:umiescProdukt"/>
       <output wsam:Action="http://localhost:8080/Magazyn/Magazyn/umiescProduktResponse" message="tns:umiescProduktResponse"/>
-    </operation>
-    <operation name="wezProdukt">
-      <input wsam:Action="http://localhost:8080/Magazyn/Magazyn/wezProduktRequest" message="tns:wezProdukt"/>
-      <output wsam:Action="http://localhost:8080/Magazyn/Magazyn/wezProduktResponse" message="tns:wezProduktResponse"/>
-      <fault message="tns:NoItemFound" name="NoItemFound" wsam:Action="http://localhost:8080/Magazyn/Magazyn/wezProdukt/Fault/NoItemFound"/>
-    </operation>
-    <operation name="wezSurowiec">
-      <input wsam:Action="http://localhost:8080/Magazyn/Magazyn/wezSurowiec" message="tns:wezSurowiec"/>
     </operation>
     <operation name="dodajSurowiec">
       <input wsam:Action="http://localhost:8080/Magazyn/Magazyn/dodajSurowiecRequest" message="tns:dodajSurowiec"/>
@@ -93,6 +93,24 @@
       <output>
         <soap:body use="literal"/>
       </output>
+    </operation>
+    <operation name="wezProdukt">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="NoItemFound">
+        <soap:fault name="NoItemFound" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="wezSurowiec">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
     </operation>
     <operation name="uzyjForme">
       <soap:operation soapAction=""/>
@@ -117,24 +135,6 @@
       <output>
         <soap:body use="literal"/>
       </output>
-    </operation>
-    <operation name="wezProdukt">
-      <soap:operation soapAction=""/>
-      <input>
-        <soap:body use="literal"/>
-      </input>
-      <output>
-        <soap:body use="literal"/>
-      </output>
-      <fault name="NoItemFound">
-        <soap:fault name="NoItemFound" use="literal"/>
-      </fault>
-    </operation>
-    <operation name="wezSurowiec">
-      <soap:operation soapAction=""/>
-      <input>
-        <soap:body use="literal"/>
-      </input>
     </operation>
     <operation name="dodajSurowiec">
       <soap:operation soapAction=""/>

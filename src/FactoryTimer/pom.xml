@@ -91,7 +91,7 @@
                         </goals>
                         <configuration>
                             <wsdlUrls>
-                                <wsdlFile>http://localhost:8080/Factory/Factory?wsdl</wsdlFile>
+                                <wsdlFile>http://localhost:8080/Factory-1.0-SNAPSHOT/Factory?wsdl</wsdlFile>
                                 <wsdlFile>http://localhost:8080/Magazyn/Magazyn?wsdl</wsdlFile>
                             </wsdlUrls>
                             <packageName>wsdl.classes</packageName>

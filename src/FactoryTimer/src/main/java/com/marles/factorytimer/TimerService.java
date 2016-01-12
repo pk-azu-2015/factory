@@ -24,18 +24,18 @@ import wsdl.classes.IdProjektu;
 @Singleton
 public class TimerService {
     
-     @WebServiceRef(wsdlLocation="http://localhost:8080/Factory/Factory?wsdl")
+     @WebServiceRef(wsdlLocation="http://localhost:8080/Factory-1.0-SNAPSHOT/Factory?wsdl")
     Factory_Service factoryService;
      
     @WebServiceRef(wsdlLocation="http://localhost:8080/Magazyn/Magazyn?wsdl")
     Magazyn_Service magazynService;
   
-    @Schedule(minute="*/5", hour="*", persistent=false)
+    @Schedule(second="*/10", minute="*", hour="*", persistent=false)
     public void doWork(){
          Factory factoryPort = factoryService.getFactoryPort();
          Logger logger = Logger.getLogger(Factory.class.getName());
          int iloscZamowien = factoryPort.czytajIloscZamowien();
-         if (iloscZamowien < 0) {
+         if (iloscZamowien <= 0) {
              return;
          }
          int partsSize = 4;

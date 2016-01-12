@@ -50,10 +50,7 @@ public class Factory {
         Magazyn magazyn = service.getMagazynPort();
         try {
             magazyn.uzyjForme(idProjekt);
-        } catch (ItemUsed_Exception ex) {
-            Logger.getLogger(Factory.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        } catch (NoItemFound_Exception ex) {
+        } catch (Exception ex) {
             Logger.getLogger(Factory.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
@@ -69,7 +66,7 @@ public class Factory {
         try {
             magazyn.wezProdukt(idProjekt, EnumUtils.stanToInt(Stan.ODLANY));
             magazyn.umiescProdukt(idProjekt, EnumUtils.stanToInt(Stan.OSZLIFOWANY));
-        } catch (NoItemFound_Exception ex) {
+        } catch (Exception ex) {
             Logger.getLogger(Factory.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
@@ -82,7 +79,7 @@ public class Factory {
         try {
             magazyn.wezProdukt(idProjekt, EnumUtils.stanToInt(Stan.OSZLIFOWANY));
             magazyn.umiescProdukt(idProjekt, EnumUtils.stanToInt(Stan.POMALOWANY));
-        } catch (NoItemFound_Exception ex) {
+        } catch (Exception ex) {
             Logger.getLogger(Factory.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
@@ -99,7 +96,7 @@ public class Factory {
             magazyn.wezProdukt(IdProjektu.KOLO.ordinal(), gotowyStan);
             magazyn.wezProdukt(IdProjektu.PILOT.ordinal(), gotowyStan);
             magazyn.umiescProdukt(IdProjektu.AUTO.ordinal(), Stan.DO_KONTROLI.ordinal());
-        } catch (NoItemFound_Exception ex) {
+        } catch (Exception ex) {
             return false;
         }
         return true;
@@ -125,10 +122,7 @@ public class Factory {
                 String linia = br.readLine().trim();
                 stanPoczatkowy = Integer.parseInt(linia);
 
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(Factory.class.getName()).log(Level.SEVERE, null, ex);
-                return -1;
-            } catch (IOException ex) {
+            } catch (Exception ex) {
                 Logger.getLogger(Factory.class.getName()).log(Level.SEVERE, null, ex);
                 return -1;
             } finally {

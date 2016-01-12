@@ -31,6 +31,12 @@
 
   <xs:element name="zwrocListeIDProduktowResponse" type="tns:zwrocListeIDProduktowResponse"/>
 
+  <xs:complexType name="wezSurowiec">
+    <xs:sequence>
+      <xs:element name="ilosc" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
   <xs:complexType name="umiescProdukt">
     <xs:sequence>
       <xs:element name="idProjektu" type="xs:int"/>
@@ -48,12 +54,6 @@
     <xs:sequence>
       <xs:element name="stan" type="tns:stan" minOccurs="0"/>
       <xs:element name="typ" type="tns:idProjektu" minOccurs="0"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="wezSurowiec">
-    <xs:sequence>
-      <xs:element name="ilosc" type="xs:int"/>
     </xs:sequence>
   </xs:complexType>
 
