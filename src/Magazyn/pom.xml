@@ -109,7 +109,7 @@
 
             </plugin>
             <!--Kopiowanie WSDL'a ze Spedycji-->
-            <plugin>
+           <!-- <plugin>
                 <groupId>org.jvnet.jax-ws-commons</groupId>
                 <artifactId>jaxws-maven-plugin</artifactId>
                 <version>2.3</version>
@@ -139,7 +139,7 @@
                         <version>2.0</version>
                     </dependency>
                 </dependencies>
-            </plugin>
+            </plugin>-->
         </plugins>
     </build>
 

@@ -18,8 +18,8 @@ import pl.edu.pk.azu.magazyn.model.Stan;
 import pl.edu.pk.azu.magazyn.persistance.*;
 import pl.edu.pk.azu.magazyn.utils.FormaFactory;
 import pl.edu.pk.azu.magazyn.utils.ProjektFactory;
-import wsdl.classes.SpedycjaWebService;
-import wsdl.classes.SpedycjaWebService_Service;
+//import wsdl.classes.SpedycjaWebService;
+//import wsdl.classes.SpedycjaWebService_Service;
 
 @WebService(serviceName = "Magazyn",
         targetNamespace = "http://localhost:8080/Magazyn/",
@@ -29,9 +29,9 @@ import wsdl.classes.SpedycjaWebService_Service;
         use = SOAPBinding.Use.LITERAL,
         parameterStyle = SOAPBinding.ParameterStyle.WRAPPED)
 public class Magazyn {
-
-    @WebServiceRef(wsdlLocation = "http://localhost:8080/Spedycja/SpedycjaWebService?wsdl")
-    private SpedycjaWebService_Service spedycjaWebService;
+//
+//    @WebServiceRef(wsdlLocation = "http://localhost:8080/Spedycja/SpedycjaWebService?wsdl")
+//    private SpedycjaWebService_Service spedycjaWebService;
 
     private FormaRepository formaRepository = RepositoryFactory.newInstanceFormRepository();
     private SurowiecRepository surowiecRepository = RepositoryFactory.newInstanceSurowiecRepository();
@@ -84,12 +84,12 @@ public class Magazyn {
 
 
     private void zamowSurowiec() {
-        try {
-            SpedycjaWebService webServicePort = spedycjaWebService.getSpedycjaWebServicePort();
-            webServicePort.zamowSurowiec(100);
-        } catch (Exception ex){
-            System.err.println(ex.getMessage());
-        }
+//        try {
+//            SpedycjaWebService webServicePort = spedycjaWebService.getSpedycjaWebServicePort();
+//            webServicePort.zamowSurowiec(100);
+//        } catch (Exception ex){
+//            System.err.println(ex.getMessage());
+//        }
     }
 
     @WebMethod(operationName = "dodajSurowiec")

@@ -89,6 +89,22 @@ public class Factory {
         return true;
     }
     
+    @WebMethod(operationName = "zlozSamochod")
+    public boolean zlozSamochod() {
+        Magazyn magazyn = new Magazyn_Service().getMagazynPort();
+        int gotowyStan = Stan.GOTOWY.ordinal();
+        try {
+            magazyn.wezProdukt(IdProjektu.KAROSERIA.ordinal(), gotowyStan);
+            magazyn.wezProdukt(IdProjektu.SILNIK.ordinal(), gotowyStan);
+            magazyn.wezProdukt(IdProjektu.KOLO.ordinal(), gotowyStan);
+            magazyn.wezProdukt(IdProjektu.PILOT.ordinal(), gotowyStan);
+            magazyn.umiescProdukt(IdProjektu.AUTO.ordinal(), Stan.DO_KONTROLI.ordinal());
+        } catch (NoItemFound_Exception ex) {
+            return false;
+        }
+        return true;
+    }
+    
     @WebMethod(operationName = "zlozZamowienie")
     public boolean zlozZamowienie(@WebParam(name = "ilosc") int iloscZamowionych) throws IOException {
         int stanPoczatkowy = wczytajStanPoczatkowy();
