@@ -42,9 +42,9 @@ public class MySqlConnection implements Connection{
         connection = null;
         statement = null;
         
-        userName = "sql499518";
-        password = "TXGfnJJzvN";
-        host = "jdbc:mysql://sql4.freemysqlhosting.net/sql499518";
+        userName = "azu2015";
+        password = "azu2015";
+        host = "jdbc:mysql://db4free.net/azu2015";
         
         connect();
     }
