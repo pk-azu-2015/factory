@@ -1,4 +1,4 @@
-package pl.edu.pk.azu.recyclingwebapp;
+    package pl.edu.pk.azu.recyclingwebapp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,60 +16,75 @@ import javax.xml.ws.WebServiceRef;
 @WebService(serviceName = "Recycling")
 @Stateless()
 public class Recycling {
-    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/Magazyn/Magazyn.wsdl")
+    @WebServiceRef(
+            wsdlLocation = "WEB-INF/wsdl/localhost_8080/Magazyn/Magazyn.wsdl"
+    )
     private pl.edu.pk.azu.magazyn.Magazyn_Service service;
+    
+    private pl.edu.pk.azu.magazyn.Magazyn port;
+    private final int stan = 5;
+    private final Random generator = new Random();
+    List<Integer> resourcesList = new ArrayList<>();
 
-    /**
-     * This is a sample web service operation
-     * @param txt
-     * @return 
-     */
-    @WebMethod(operationName = "hello")
-    public String hello(@WebParam(name = "name") String txt) {
-        return "Hello " + txt + " !\nHave a nice day!\n and go Hell ";
+    
+    private void sysException(Exception ex, String desc){
+        System.out.println(desc);
+        System.out.println(ex.getMessage());
+    }
+    
+    private List<Integer> getProductsListID(){
+        try {    
+            resourcesList = port.zwrocListeIDProduktow(stan);
+            System.out.println("Result = "+ resourcesList);
+        } catch (Exception ex) {
+            sysException(ex, "Brak produktów do recyklingu");
+        }
+        return resourcesList;
+    }
+    
+    private void recycleSingleProduct(Integer idProjektu){
+         pl.edu.pk.azu.magazyn.Projekt result = null;
+        try {
+            result = port.wezProdukt(idProjektu, stan);
+            System.out.println("Result = " + result);
+            //zwracanie na stan magazynu surowców
+            returnResources(idProjektu);
+        } catch (Exception ex) {
+            sysException(ex, "Brak konkretnego produkt do recyklingu");
+        }
+    }
+    
+    private void returnResources(Integer idProjektu){
+        try { 
+            //dodawani losowej ilości surowa do magazynu
+            port.dodajSurowiec(generator.nextInt(idProjektu));
+        } catch (Exception ex) {
+            sysException(ex, "napotkano problem podczas wysyłania surowca do " +
+                    "Magazynu: ");
+        }
+    }
+    
+    private void mainLoop(){
+        try {
+            // pobieranie listy produktów do recyklingu
+            resourcesList = getProductsListID();
+            
+           for(int idProjektu : resourcesList) {
+               //Pobieranie produktu o konkretnym ID
+             recycleSingleProduct(idProjektu); 
+           }
+        } catch (Exception ex){
+            sysException(ex, "napotkano problem podczas połączenia do " +
+                    "Magazynu: ");
+        }
     }
     
     @WebMethod(operationName = "handleWithRecycling")
-    public void handleWithRecycling() {
-         //definiowanie połączenia z magazynem
-        pl.edu.pk.azu.magazyn.Magazyn port;
-        try {
-            //łączenie z magazynem
-            port = service.getMagazynPort();
-            //ustawienia generotora pseudolosowego
-            Random generator = new Random();
-            //definicja parametrów do interfejsu Magazynu
-            final int stan = 5;//enum zepsutego produktu
-            List<Integer> resources = new ArrayList<>();
-            // pobieranie listy produktów do recyklingu
-            try {
-               resources = port.zwrocListeIDProduktow(stan);
-               System.out.println("Result = "+ resources);
-           } catch (Exception ex) {
-               System.out.println("Brak produktów do recyklingu");
-               System.out.println(ex.getMessage());
-           }
-            
-           for(int idProjektu : resources) {
-               //Pobieranie produktu o konkretnym ID
-               try {
-                   pl.edu.pk.azu.magazyn.Projekt result = port.wezProdukt(idProjektu, stan);
-                   System.out.println("Result = " + result);
-               } catch (Exception ex) {
-                   System.out.println("Brak konkretnego produkt do recyklingu");
-                   System.out.println(ex.getMessage());
-               }
-               
-               try { 
-                   port.dodajSurowiec(generator.nextInt(idProjektu));//dodawani losowej ilości surowa do magazynu
-               } catch (Exception ex) {
-                   System.out.println("napotkano problem podczas wysyłania surowca do Magazynu: ");
-                   System.out.println(ex.getMessage());
-               }
-           }
-        } catch (Exception ex){
-            System.out.println("napotkano problem podczas połączenia do Magazynu: ");
-            System.out.println(ex.getMessage());
+    public void handleWithRecycling() throws InterruptedException {
+        port = service.getMagazynPort();
+        while(true){
+           mainLoop();
+           Thread.sleep(100);
         }
     }
 }
