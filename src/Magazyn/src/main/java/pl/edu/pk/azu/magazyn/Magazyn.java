@@ -1,11 +1,14 @@
 package pl.edu.pk.azu.magazyn;
 
 import java.util.List;
+import java.util.logging.Logger;
 import javax.jws.Oneway;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.soap.SOAPBinding;
+import javax.xml.ws.WebServiceRef;
+
 import pl.edu.pk.azu.magazyn.exceptions.ItemUsed;
 
 import pl.edu.pk.azu.magazyn.exceptions.NoItemFound;
@@ -13,9 +16,10 @@ import pl.edu.pk.azu.magazyn.model.Forma;
 import pl.edu.pk.azu.magazyn.model.Projekt;
 import pl.edu.pk.azu.magazyn.model.Stan;
 import pl.edu.pk.azu.magazyn.persistance.*;
-import pl.edu.pk.azu.magazyn.utils.EnumUtils;
 import pl.edu.pk.azu.magazyn.utils.FormaFactory;
 import pl.edu.pk.azu.magazyn.utils.ProjektFactory;
+import wsdl.classes.SpedycjaWebService;
+import wsdl.classes.SpedycjaWebService_Service;
 
 @WebService(serviceName = "Magazyn",
         targetNamespace = "http://localhost:8080/Magazyn/",
@@ -26,9 +30,15 @@ import pl.edu.pk.azu.magazyn.utils.ProjektFactory;
         parameterStyle = SOAPBinding.ParameterStyle.WRAPPED)
 public class Magazyn {
 
-    FormaRepository formaRepository = RepositoryFactory.newInstanceFormRepository();
-    ProjektRepository projektRepository = RepositoryFactory.newInstanceProjektRepository();
-    SurowiecRepository surowiecRepository = RepositoryFactory.newInstanceSurowiecRepository();
+    @WebServiceRef(wsdlLocation = "http://localhost:8080/Spedycja/SpedycjaWebService?wsdl")
+    private SpedycjaWebService_Service spedycjaWebService;
+
+    private FormaRepository formaRepository = RepositoryFactory.newInstanceFormRepository();
+    private SurowiecRepository surowiecRepository = RepositoryFactory.newInstanceSurowiecRepository();
+    private ProjektRepository projektRepository = RepositoryFactory.newInstanceProjektRepository();
+
+
+
 
     @WebMethod(operationName = "dodajForme")
     public Forma dodajForme(@WebParam(name = "idProjektu") int idProjektu) {
@@ -74,7 +84,12 @@ public class Magazyn {
 
 
     private void zamowSurowiec() {
-        //TODO: Połączenie ze spedycją
+        try {
+            SpedycjaWebService webServicePort = spedycjaWebService.getSpedycjaWebServicePort();
+            webServicePort.zamowSurowiec(100);
+        } catch (Exception ex){
+            System.err.println(ex.getMessage());
+        }
     }
 
     @WebMethod(operationName = "dodajSurowiec")
@@ -85,7 +100,7 @@ public class Magazyn {
 
     @WebMethod(operationName = "zwrocListeIDProduktow")
     public List<Integer> zwrocListeIDProduktow(@WebParam(name = "stan") int stan) {
-        Stan stanEnum = EnumUtils.intToStan(stan);
+        Stan stanEnum = Stan.fromInt(stan);
         List<Integer> idList = projektRepository.zwrocProjektyOStanie(stanEnum);
         return idList;
     }

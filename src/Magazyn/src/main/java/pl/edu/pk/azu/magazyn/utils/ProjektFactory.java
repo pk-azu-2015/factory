@@ -7,8 +7,8 @@ import pl.edu.pk.azu.magazyn.model.Stan;
 
 public class ProjektFactory {
     public static Projekt createProject(int idProjektu, int idStan) {
-        IdProjektu idProjektuEnum = EnumUtils.intToIdProjektu(idProjektu);
-        Stan stanEnum = EnumUtils.intToStan(idStan);
+        IdProjektu idProjektuEnum = IdProjektu.fromInt(idProjektu);
+        Stan stanEnum = Stan.fromInt(idStan);
 
         Projekt projekt = new Projekt(idProjektuEnum, stanEnum);
         return projekt;
