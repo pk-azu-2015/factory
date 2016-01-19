@@ -2,6 +2,7 @@ package pl.edu.pk.azu.magazyn.persistance;
 
 
 import pl.edu.pk.azu.magazyn.exceptions.NoItemFound;
+import pl.edu.pk.azu.magazyn.model.IdProjektu;
 import pl.edu.pk.azu.magazyn.model.Projekt;
 import pl.edu.pk.azu.magazyn.model.Stan;
 
@@ -19,5 +20,7 @@ public interface ProjektRepository {
      * {IdProjektu.KOLO, IdProjektu.KOLO, IdProjektu.SILNIK, IdProjektu.SILNIK, IdProjektu.KAROSERIA}
      */
     List<Integer> zwrocProjektyOStanie(Stan stan);
+
+    int count(Stan stan, IdProjektu idProjektu);
 
 }

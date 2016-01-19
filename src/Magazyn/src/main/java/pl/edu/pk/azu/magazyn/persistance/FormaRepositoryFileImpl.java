@@ -1,12 +1,12 @@
 package pl.edu.pk.azu.magazyn.persistance;
 
 import pl.edu.pk.azu.magazyn.exceptions.ItemUsed;
-import pl.edu.pk.azu.magazyn.exceptions.ItemUsedExceptionBean;
 import pl.edu.pk.azu.magazyn.exceptions.NoItemFound;
-import pl.edu.pk.azu.magazyn.exceptions.NoItemFoundExceptionBean;
 import pl.edu.pk.azu.magazyn.model.Forma;
+import pl.edu.pk.azu.magazyn.model.IdProjektu;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
@@ -15,16 +15,7 @@ public class FormaRepositoryFileImpl implements FormaRepository {
     private HashMap<Forma,AtomicInteger> formaCounter;
     private HashMap<Forma,AtomicInteger> formaUsageCounter;
 
-    private static FormaRepositoryFileImpl instance;
-
-    public static FormaRepositoryFileImpl getInstance() {
-        if(instance == null) {
-            instance = new FormaRepositoryFileImpl();
-        }
-        return instance;
-    }
-
-    private FormaRepositoryFileImpl() {
+    public FormaRepositoryFileImpl() {
         formaCounter = new HashMap<>();
         formaUsageCounter = new HashMap<>();
     }
@@ -52,21 +43,21 @@ public class FormaRepositoryFileImpl implements FormaRepository {
             formaUsageCounter.put(forma, usageCounter);
         }
     }
-
+/*
     @Override
     public void wezForme(Forma forma) throws NoItemFound {
         AtomicInteger counterOfForm = formaCounter.get(forma);
 
         if(!isExist(counterOfForm)) {
-            throw new NoItemFound(forma.toString(), new NoItemFoundExceptionBean(forma.toString()) );
+            throw new NoItemFound(forma.toString() );
         }
 
         int amountOfFormsAfterDecrementation = takeForm(counterOfForm);
         if (lessThanZero(amountOfFormsAfterDecrementation)) {
-            throw new NoItemFound(forma.toString(),new NoItemFoundExceptionBean(forma.toString()));
+            throw new NoItemFound(forma.toString());
         }
     }
-
+*/
     @Override
     public void uzyjForme(Forma forma) throws NoItemFound, ItemUsed {
         AtomicInteger formaUsage = formaUsageCounter.get(forma);
@@ -75,11 +66,16 @@ public class FormaRepositoryFileImpl implements FormaRepository {
             if(isUsageOfFormLessThanMaxUsage(formaUsage)) {
                 useForm(formaUsage);
             } else {
-               throw new ItemUsed(forma.toString(), new ItemUsedExceptionBean(forma.toString()));
+               throw new ItemUsed(forma.toString());
             }
         } else {
-            throw new NoItemFound(forma.toString(), new NoItemFoundExceptionBean(forma.toString()));
+            throw new NoItemFound(forma.toString());
         }
+    }
+
+    @Override
+    public int count(IdProjektu idProjektu) {
+        return 0;
     }
 
     private boolean isExist(AtomicInteger formaUsage) {

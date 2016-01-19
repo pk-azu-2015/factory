@@ -1,10 +1,9 @@
 package pl.edu.pk.azu.magazyn.persistance;
 
 import pl.edu.pk.azu.magazyn.exceptions.NoItemFound;
-import pl.edu.pk.azu.magazyn.exceptions.NoItemFoundExceptionBean;
+import pl.edu.pk.azu.magazyn.model.IdProjektu;
 import pl.edu.pk.azu.magazyn.model.Projekt;
 import pl.edu.pk.azu.magazyn.model.Stan;
-import pl.edu.pk.azu.magazyn.utils.EnumUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,16 +15,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class ProjektRepositoryFileImpl implements ProjektRepository {
     private HashMap<Projekt, AtomicInteger> projektyCounter;
 
-    private static ProjektRepositoryFileImpl instance;
 
-    public static ProjektRepositoryFileImpl getInstance() {
-        if (instance == null) {
-            instance = new ProjektRepositoryFileImpl();
-        }
-        return instance;
-    }
-
-    private ProjektRepositoryFileImpl() {
+    public ProjektRepositoryFileImpl() {
         projektyCounter = new HashMap<>();
     }
 
@@ -36,10 +27,10 @@ public class ProjektRepositoryFileImpl implements ProjektRepository {
         if (counterExists(counter)) {
             int projectCounterAfterDecrementation = takeProject(counter);
             if (lessThanZero(projectCounterAfterDecrementation)) {
-                throw new NoItemFound(projekt.toString(),new NoItemFoundExceptionBean(projekt.toString()));
+                throw new NoItemFound(projekt.toString());
             }
         } else {
-            throw new NoItemFound(projekt.toString(),new NoItemFoundExceptionBean(projekt.toString()));
+            throw new NoItemFound(projekt.toString());
         }
     }
 
@@ -69,7 +60,7 @@ public class ProjektRepositoryFileImpl implements ProjektRepository {
     private void addProjectToList(Projekt projekt, final List<Integer> projectIdList) {
         int counter =  projektyCounter.get(projekt).intValue();
         for (int i = 0; i < counter; i++) {
-            int idProjektAsInt = EnumUtils.idProjektuToInt(projekt.getTyp());
+            int idProjektAsInt = projekt.getTyp().getId();
             projectIdList.add(new Integer(idProjektAsInt));
         }
     }
@@ -88,5 +79,10 @@ public class ProjektRepositoryFileImpl implements ProjektRepository {
 
     private boolean lessThanZero(int projectCounterAfterDecrementation) {
         return projectCounterAfterDecrementation < 0;
+    }
+
+    @Override
+    public int count(Stan stan, IdProjektu idProjektu) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

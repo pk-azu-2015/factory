@@ -9,7 +9,10 @@ http://azurepairapp2015.somee.com/RepairService.asmx
 | ---------------- | ------------------------------------------------ | -------   | :---: |
 | naprawProdukt  | id produktu, stan | status naprawy    | -      |
 
-**naprawProdukt**: operacja przyjmująca na wejście id produktu o nieznanym stanie. Operacja sprawdza, czy stan jest "ZEPSUTY" (ad. Magazyn). Jesli tak - produkt jest naprawiany (pobranie z magazynu produktu o zadanym id i umieszczenie w magazynie takiego samego produktu, ale naprawianego) i zwracany jest status naprawy "true". Jesli stan jest inny - status naprawy "false" (brak operacji).
+**naprawProdukt**: operacja przyjmująca na wejście produkt o stanie "ZEPSUTY". Produkt jest naprawiany (zmiana stanu na "GOTOWY") i umieszczany w magazynie z nowym stanem. Zwracany jest status naprawy "true". Jeśli stan jest inny - status naprawy "false" (brak operacji).
+
+
+Działanie usługi oparte jest na pracy aplikacji klienckiej pobierającej z Magazynu listę produktów w stanie "ZEPSUTY". Ta sama aplikacja wywołuje następnie metodę naprawProdukt.
 
 
 ###Powiązania z innymi usługami:
@@ -21,14 +24,19 @@ Powiązania zawarte są w operacjach „naprawProdukt” (powiązanie z Magazyne
 
 ![alt text](http://funkyimg.com/i/24T2q.png "Diagram klas usługi Naprawa")
 
-**[out of date] Diagram przypadków użycia:**
-![alt text](http://funkyimg.com/i/23Qy4.png "Diagram przypadków użycia")
+**Diagram przypadków użycia:**
 
-**Diagram powiązania z usługami Magazynu:**
-![alt text](http://funkyimg.com/i/243LU.jpg "Diagram powiązania z Magazynem")
+![alt text](http://funkyimg.com/i/25hnc.png "Diagram przypadków użycia")
+
+**Diagram sekwencji:**
+
+![alt text](http://funkyimg.com/i/25hpG.png "Diagram sekwencji")
 
 ```
 changelog :
+2016-01-19: Uściślenie opisu głównej metody oraz zasady działania aplikacji klienckiej.
+2015-12-08: Dodanie diagramu sekwencji.
+2015-12-08: Uaktualnienie diagramu przypadków użycia.
 2015-11-24: Uaktualnienie diagramu klas.
 2015-11-17: Hosting uslugi + dodanie adresu.
 2015-11-17: Uaktualnienie opisu.

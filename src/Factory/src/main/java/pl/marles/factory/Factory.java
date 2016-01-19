@@ -14,13 +14,19 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.xml.ws.WebServiceRef;
-import pl.edu.pk.azu.magazyn.Magazyn;
-import pl.edu.pk.azu.magazyn.Magazyn_Service;
-import pl.edu.pk.azu.magazyn.NoItemFound_Exception;
+import wsdl.classes.IdProjektu;
+import wsdl.classes.ItemUsed_Exception;
+import wsdl.classes.Magazyn;
+import wsdl.classes.Magazyn_Service;
+import wsdl.classes.NoItemFound_Exception;
+import wsdl.classes.Stan;
 
-@WebService(serviceName = "Factory")
+
+@WebService(serviceName = "Factory",
+        targetNamespace = "http://localhost:8080/Factory/",
+        portName = "FactoryPort")
 public class Factory {
-    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_17952/Magazyn/Magazyn.wsdl")
+    @WebServiceRef(wsdlLocation = "http://localhost:8080/Magazyn/Magazyn?wsdl")
     private Magazyn_Service service;
     
     private final String NAZWA_PLIKU = "zamowienia.txt";
@@ -34,6 +40,7 @@ public class Factory {
             
             magazyn.dodajForme(idProjektu);
         } catch (Exception ex) {
+            return -1;
         }
         return idProjektu;
     }
@@ -41,8 +48,13 @@ public class Factory {
     @WebMethod(operationName = "wykonajOdlew")
     public boolean wykonajOdlew(@WebParam(name = "ID_Projektu") int idProjekt) {
         Magazyn magazyn = service.getMagazynPort();
-        magazyn.uzyjForme(idProjekt);
-        magazyn.umiescProdukt(idProjekt, 0);
+        try {
+            magazyn.uzyjForme(idProjekt);
+        } catch (Exception ex) {
+            Logger.getLogger(Factory.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        magazyn.umiescProdukt(idProjekt, EnumUtils.stanToInt(Stan.ODLANY));
         return true;
     }
     
@@ -52,9 +64,9 @@ public class Factory {
     public boolean szlifuj(@WebParam(name = "ID_Projektu") int idProjekt) {
         Magazyn magazyn = new Magazyn_Service().getMagazynPort();
         try {
-            magazyn.wezProdukt(idProjekt, 0);
-            magazyn.umiescProdukt(idProjekt, 1);
-        } catch (NoItemFound_Exception ex) {
+            magazyn.wezProdukt(idProjekt, EnumUtils.stanToInt(Stan.ODLANY));
+            magazyn.umiescProdukt(idProjekt, EnumUtils.stanToInt(Stan.OSZLIFOWANY));
+        } catch (Exception ex) {
             Logger.getLogger(Factory.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
@@ -65,10 +77,26 @@ public class Factory {
     public boolean maluj(@WebParam(name = "ID_Projektu") int idProjekt) {
         Magazyn magazyn = new Magazyn_Service().getMagazynPort();
         try {
-            magazyn.wezProdukt(idProjekt, 1);
-            magazyn.umiescProdukt(idProjekt, 2);
-        } catch (NoItemFound_Exception ex) {
+            magazyn.wezProdukt(idProjekt, EnumUtils.stanToInt(Stan.OSZLIFOWANY));
+            magazyn.umiescProdukt(idProjekt, EnumUtils.stanToInt(Stan.POMALOWANY));
+        } catch (Exception ex) {
             Logger.getLogger(Factory.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        return true;
+    }
+    
+    @WebMethod(operationName = "zlozSamochod")
+    public boolean zlozSamochod() {
+        Magazyn magazyn = new Magazyn_Service().getMagazynPort();
+        int gotowyStan = Stan.GOTOWY.ordinal();
+        try {
+            magazyn.wezProdukt(IdProjektu.KAROSERIA.ordinal(), gotowyStan);
+            magazyn.wezProdukt(IdProjektu.SILNIK.ordinal(), gotowyStan);
+            magazyn.wezProdukt(IdProjektu.KOLO.ordinal(), gotowyStan);
+            magazyn.wezProdukt(IdProjektu.PILOT.ordinal(), gotowyStan);
+            magazyn.umiescProdukt(IdProjektu.AUTO.ordinal(), Stan.DO_KONTROLI.ordinal());
+        } catch (Exception ex) {
             return false;
         }
         return true;
@@ -77,9 +105,11 @@ public class Factory {
     @WebMethod(operationName = "zlozZamowienie")
     public boolean zlozZamowienie(@WebParam(name = "ilosc") int iloscZamowionych) throws IOException {
         int stanPoczatkowy = wczytajStanPoczatkowy();
+        if (stanPoczatkowy == -1) {
+            return false;
+        }
         System.out.println("stanPoczatkowy: " + stanPoczatkowy);
-        zapiszIlosc(stanPoczatkowy + iloscZamowionych);
-        return true;
+        return zapiszIlosc(stanPoczatkowy + iloscZamowionych);
     }
 
     private int wczytajStanPoczatkowy() {
@@ -92,24 +122,23 @@ public class Factory {
                 String linia = br.readLine().trim();
                 stanPoczatkowy = Integer.parseInt(linia);
 
-            } catch (FileNotFoundException ex) {
+            } catch (Exception ex) {
                 Logger.getLogger(Factory.class.getName()).log(Level.SEVERE, null, ex);
-                return 0;
-            } catch (IOException ex) {
-                Logger.getLogger(Factory.class.getName()).log(Level.SEVERE, null, ex);
-                return 0;
+                return -1;
             } finally {
                 try {
                     br.close();
                 } catch (IOException ex) {
                     Logger.getLogger(Factory.class.getName()).log(Level.SEVERE, null, ex);
+                return -1;
                 }
             }
         }
         return stanPoczatkowy;
     }
 
-    private boolean zapiszIlosc(int nowaIlosc) {
+    @WebMethod(operationName = "zapiszIlosc")
+    public boolean zapiszIlosc(int nowaIlosc) {
         try {
             PrintWriter zapis = null;
             zapis = new PrintWriter(NAZWA_PLIKU);
@@ -122,4 +151,26 @@ public class Factory {
         }
     }
     
+    @WebMethod(operationName = "czytajIloscZamowien")
+    public int czytajIloscZamowien() {
+        return wczytajStanPoczatkowy();
+    }
+    
+    public static class EnumUtils {
+        public static IdProjektu intToIdProjektu(int idAsInt) {
+            return IdProjektu.values()[idAsInt];
+        }
+
+        public static Stan intToStan(int stanAsInt) {
+            return Stan.values()[stanAsInt];
+        }
+
+        public static int stanToInt(Stan stan) {
+            return stan.ordinal();
+        }
+        
+        public static int idProjektuToInt(IdProjektu typ) {
+            return typ.ordinal();
+        }
+    }
 }
