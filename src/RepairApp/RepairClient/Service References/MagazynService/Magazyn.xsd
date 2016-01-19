@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://localhost:8080/Magazyn/" targetNamespace="http://localhost:8080/Magazyn/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="BadParam" type="tns:BadParam" />
+  <xs:element name="ItemUsed" type="tns:ItemUsed" />
+  <xs:element name="NoItemFound" type="tns:NoItemFound" />
+  <xs:element name="dodajForme" type="tns:dodajForme" />
+  <xs:element name="dodajFormeResponse" type="tns:dodajFormeResponse" />
+  <xs:element name="dodajSurowiec" type="tns:dodajSurowiec" />
+  <xs:element name="dodajSurowiecResponse" type="tns:dodajSurowiecResponse" />
+  <xs:element name="getAllCount" type="tns:getAllCount" />
+  <xs:element name="getAllCountResponse" type="tns:getAllCountResponse" />
+  <xs:element name="info" type="tns:info" />
+  <xs:element name="infoResponse" type="tns:infoResponse" />
+  <xs:element name="umiescProdukt" type="tns:umiescProdukt" />
+  <xs:element name="umiescProduktResponse" type="tns:umiescProduktResponse" />
+  <xs:element name="uzyjForme" type="tns:uzyjForme" />
+  <xs:element name="uzyjFormeResponse" type="tns:uzyjFormeResponse" />
+  <xs:element name="wezProdukt" type="tns:wezProdukt" />
+  <xs:element name="wezProduktResponse" type="tns:wezProduktResponse" />
+  <xs:element name="wezSurowiec" type="tns:wezSurowiec" />
+  <xs:element name="wezSurowiecResponse" type="tns:wezSurowiecResponse" />
+  <xs:element name="zwrocListeIDProduktow" type="tns:zwrocListeIDProduktow" />
+  <xs:element name="zwrocListeIDProduktowResponse" type="tns:zwrocListeIDProduktowResponse" />
+  <xs:complexType name="info">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="infoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="dodajSurowiec">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="dodajSurowiecResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getAllCount">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="getAllCountResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="umiescProdukt">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:int" />
+      <xs:element name="arg1" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="umiescProduktResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:projekt" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="projekt">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="stan" type="tns:stan" />
+      <xs:element minOccurs="0" name="typ" type="tns:idProjektu" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BadParam">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="wezSurowiec">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="wezSurowiecResponse">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="zwrocListeIDProduktow">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="zwrocListeIDProduktowResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="wezProdukt">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:int" />
+      <xs:element name="arg1" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="wezProduktResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:projekt" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="NoItemFound">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="uzyjForme">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="uzyjFormeResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:forma" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="forma">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="typ" type="tns:idProjektu" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ItemUsed">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="dodajForme">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="dodajFormeResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:forma" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="stan">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ODLANY" />
+      <xs:enumeration value="OSZLIFOWANY" />
+      <xs:enumeration value="POMALOWANY" />
+      <xs:enumeration value="DO_KONTROLI" />
+      <xs:enumeration value="GOTOWY" />
+      <xs:enumeration value="ZEPSUTY" />
+      <xs:enumeration value="DO_RECYKLINGU" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="idProjektu">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="KOLO" />
+      <xs:enumeration value="SILNIK" />
+      <xs:enumeration value="KAROSERIA" />
+      <xs:enumeration value="PILOT" />
+      <xs:enumeration value="AUTO" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

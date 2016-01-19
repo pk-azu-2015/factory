@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://localhost:8080/Magazyn/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="Magazyn" targetNamespace="http://localhost:8080/Magazyn/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/Magazyn/Magazyn?xsd=1" namespace="http://localhost:8080/Magazyn/" />
+    </xsd:schema>
+  </types>
+  <message name="getAllCount">
+    <part name="parameters" element="tns:getAllCount" />
+  </message>
+  <message name="getAllCountResponse">
+    <part name="parameters" element="tns:getAllCountResponse" />
+  </message>
+  <message name="uzyjForme">
+    <part name="parameters" element="tns:uzyjForme" />
+  </message>
+  <message name="uzyjFormeResponse">
+    <part name="parameters" element="tns:uzyjFormeResponse" />
+  </message>
+  <message name="NoItemFound">
+    <part name="fault" element="tns:NoItemFound" />
+  </message>
+  <message name="ItemUsed">
+    <part name="fault" element="tns:ItemUsed" />
+  </message>
+  <message name="BadParam">
+    <part name="fault" element="tns:BadParam" />
+  </message>
+  <message name="umiescProdukt">
+    <part name="parameters" element="tns:umiescProdukt" />
+  </message>
+  <message name="umiescProduktResponse">
+    <part name="parameters" element="tns:umiescProduktResponse" />
+  </message>
+  <message name="wezSurowiec">
+    <part name="parameters" element="tns:wezSurowiec" />
+  </message>
+  <message name="wezSurowiecResponse">
+    <part name="parameters" element="tns:wezSurowiecResponse" />
+  </message>
+  <message name="zwrocListeIDProduktow">
+    <part name="parameters" element="tns:zwrocListeIDProduktow" />
+  </message>
+  <message name="zwrocListeIDProduktowResponse">
+    <part name="parameters" element="tns:zwrocListeIDProduktowResponse" />
+  </message>
+  <message name="wezProdukt">
+    <part name="parameters" element="tns:wezProdukt" />
+  </message>
+  <message name="wezProduktResponse">
+    <part name="parameters" element="tns:wezProduktResponse" />
+  </message>
+  <message name="dodajSurowiec">
+    <part name="parameters" element="tns:dodajSurowiec" />
+  </message>
+  <message name="dodajSurowiecResponse">
+    <part name="parameters" element="tns:dodajSurowiecResponse" />
+  </message>
+  <message name="dodajForme">
+    <part name="parameters" element="tns:dodajForme" />
+  </message>
+  <message name="dodajFormeResponse">
+    <part name="parameters" element="tns:dodajFormeResponse" />
+  </message>
+  <message name="info">
+    <part name="parameters" element="tns:info" />
+  </message>
+  <message name="infoResponse">
+    <part name="parameters" element="tns:infoResponse" />
+  </message>
+  <portType name="MagazynImpl">
+    <operation name="getAllCount">
+      <input wsam:Action="http://localhost:8080/Magazyn/MagazynImpl/getAllCountRequest" message="tns:getAllCount" />
+      <output wsam:Action="http://localhost:8080/Magazyn/MagazynImpl/getAllCountResponse" message="tns:getAllCountResponse" />
+    </operation>
+    <operation name="uzyjForme">
+      <input wsam:Action="http://localhost:8080/Magazyn/MagazynImpl/uzyjFormeRequest" message="tns:uzyjForme" />
+      <output wsam:Action="http://localhost:8080/Magazyn/MagazynImpl/uzyjFormeResponse" message="tns:uzyjFormeResponse" />
+      <fault wsam:Action="http://localhost:8080/Magazyn/MagazynImpl/uzyjForme/Fault/NoItemFound" name="NoItemFound" message="tns:NoItemFound" />
+      <fault wsam:Action="http://localhost:8080/Magazyn/MagazynImpl/uzyjForme/Fault/ItemUsed" name="ItemUsed" message="tns:ItemUsed" />
+      <fault wsam:Action="http://localhost:8080/Magazyn/MagazynImpl/uzyjForme/Fault/BadParam" name="BadParam" message="tns:BadParam" />
+    </operation>
+    <operation name="umiescProdukt">
+      <input wsam:Action="http://localhost:8080/Magazyn/MagazynImpl/umiescProduktRequest" message="tns:umiescProdukt" />
+      <output wsam:Action="http://localhost:8080/Magazyn/MagazynImpl/umiescProduktResponse" message="tns:umiescProduktResponse" />
+      <fault wsam:Action="http://localhost:8080/Magazyn/MagazynImpl/umiescProdukt/Fault/BadParam" name="BadParam" message="tns:BadParam" />
+    </operation>
+    <operation name="wezSurowiec">
+      <input wsam:Action="http://localhost:8080/Magazyn/MagazynImpl/wezSurowiecRequest" message="tns:wezSurowiec" />
+      <output wsam:Action="http://localhost:8080/Magazyn/MagazynImpl/wezSurowiecResponse" message="tns:wezSurowiecResponse" />
+    </operation>
+    <operation name="zwrocListeIDProduktow">
+      <input wsam:Action="http://localhost:8080/Magazyn/MagazynImpl/zwrocListeIDProduktowRequest" message="tns:zwrocListeIDProduktow" />
+      <output wsam:Action="http://localhost:8080/Magazyn/MagazynImpl/zwrocListeIDProduktowResponse" message="tns:zwrocListeIDProduktowResponse" />
+    </operation>
+    <operation name="wezProdukt">
+      <input wsam:Action="http://localhost:8080/Magazyn/MagazynImpl/wezProduktRequest" message="tns:wezProdukt" />
+      <output wsam:Action="http://localhost:8080/Magazyn/MagazynImpl/wezProduktResponse" message="tns:wezProduktResponse" />
+      <fault wsam:Action="http://localhost:8080/Magazyn/MagazynImpl/wezProdukt/Fault/NoItemFound" name="NoItemFound" message="tns:NoItemFound" />
+      <fault wsam:Action="http://localhost:8080/Magazyn/MagazynImpl/wezProdukt/Fault/BadParam" name="BadParam" message="tns:BadParam" />
+    </operation>
+    <operation name="dodajSurowiec">
+      <input wsam:Action="http://localhost:8080/Magazyn/MagazynImpl/dodajSurowiecRequest" message="tns:dodajSurowiec" />
+      <output wsam:Action="http://localhost:8080/Magazyn/MagazynImpl/dodajSurowiecResponse" message="tns:dodajSurowiecResponse" />
+    </operation>
+    <operation name="dodajForme">
+      <input wsam:Action="http://localhost:8080/Magazyn/MagazynImpl/dodajFormeRequest" message="tns:dodajForme" />
+      <output wsam:Action="http://localhost:8080/Magazyn/MagazynImpl/dodajFormeResponse" message="tns:dodajFormeResponse" />
+      <fault wsam:Action="http://localhost:8080/Magazyn/MagazynImpl/dodajForme/Fault/BadParam" name="BadParam" message="tns:BadParam" />
+    </operation>
+    <operation name="info">
+      <input wsam:Action="http://localhost:8080/Magazyn/MagazynImpl/infoRequest" message="tns:info" />
+      <output wsam:Action="http://localhost:8080/Magazyn/MagazynImpl/infoResponse" message="tns:infoResponse" />
+    </operation>
+  </portType>
+  <binding name="MagazynPortBinding" type="tns:MagazynImpl">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="getAllCount">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="uzyjForme">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="NoItemFound">
+        <soap:fault use="literal" name="NoItemFound" namespace="" />
+      </fault>
+      <fault name="ItemUsed">
+        <soap:fault use="literal" name="ItemUsed" namespace="" />
+      </fault>
+      <fault name="BadParam">
+        <soap:fault use="literal" name="BadParam" namespace="" />
+      </fault>
+    </operation>
+    <operation name="umiescProdukt">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="BadParam">
+        <soap:fault use="literal" name="BadParam" namespace="" />
+      </fault>
+    </operation>
+    <operation name="wezSurowiec">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="zwrocListeIDProduktow">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="wezProdukt">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="NoItemFound">
+        <soap:fault use="literal" name="NoItemFound" namespace="" />
+      </fault>
+      <fault name="BadParam">
+        <soap:fault use="literal" name="BadParam" namespace="" />
+      </fault>
+    </operation>
+    <operation name="dodajSurowiec">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="dodajForme">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="BadParam">
+        <soap:fault use="literal" name="BadParam" namespace="" />
+      </fault>
+    </operation>
+    <operation name="info">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="Magazyn">
+    <port name="MagazynPort" binding="tns:MagazynPortBinding">
+      <soap:address location="http://localhost:8080/Magazyn/Magazyn" />
+    </port>
+  </service>
+</definitions>

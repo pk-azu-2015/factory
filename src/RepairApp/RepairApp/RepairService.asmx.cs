@@ -16,21 +16,30 @@ namespace RepairApp
     // [System.Web.Script.Services.ScriptService]
     public class RepairService : System.Web.Services.WebService
     {
+        MagazynService.MagazynImplClient magazynClient = new MagazynService.MagazynImplClient();
 
         [WebMethod]
         public Boolean naprawProdukt(int idProduktu, int stan)
         {
             Boolean status = false;
-            if(stan == 5)
+
+            try
             {
-                //Produkt produkt = Magazyn.wezProdukt(idProduktu, stan);
-                //if(produkt!=null)
-                //{  
-                //  Magazyn.umiescProdukt(idProduktu, 4);
-                //  status = true;
-                //}
-                status = true;
+                if (stan == (int)MagazynService.stan.ZEPSUTY)
+                {
+                    MagazynService.projekt projekt = magazynClient.wezProdukt(idProduktu, stan);
+                    if (projekt != null)
+                    {
+                        projekt = magazynClient.umiescProdukt(idProduktu, (int)MagazynService.stan.GOTOWY);
+                        status = true;
+                    }
+                }
             }
+            catch(Exception ex)
+            {
+                status = false;
+            }
+
             return status;
         }
     }
