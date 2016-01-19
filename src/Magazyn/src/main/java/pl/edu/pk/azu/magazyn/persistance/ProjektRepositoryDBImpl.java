@@ -105,8 +105,22 @@ public class ProjektRepositoryDBImpl implements ProjektRepository {
             Logger.getLogger(ProjektRepositoryDBImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return projekty;
-    }   
+    }
 
-    
+    @Override
+    public List<Projekt> getAll() {
+        return null;
+    }
+
+    @Override
+    public int count(Stan stan) {
+        return 0;
+    }
+
+    @Override
+    public int count(IdProjektu idProjektu) {
+        return 0;
+    }
+
 
 }

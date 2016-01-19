@@ -3,8 +3,10 @@ package pl.edu.pk.azu.magazyn.persistance;
 import pl.edu.pk.azu.magazyn.exceptions.ItemUsed;
 import pl.edu.pk.azu.magazyn.exceptions.NoItemFound;
 import pl.edu.pk.azu.magazyn.model.Forma;
+import pl.edu.pk.azu.magazyn.model.IdProjektu;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
@@ -69,6 +71,16 @@ public class FormaRepositoryFileImpl implements FormaRepository {
         } else {
             throw new NoItemFound(forma.toString());
         }
+    }
+
+    @Override
+    public List<Forma> getAll() {
+        return null;
+    }
+
+    @Override
+    public int count(IdProjektu idProjektu) {
+        return 0;
     }
 
     private boolean isExist(AtomicInteger formaUsage) {

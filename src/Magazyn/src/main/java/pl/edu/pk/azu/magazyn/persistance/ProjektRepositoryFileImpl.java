@@ -1,6 +1,7 @@
 package pl.edu.pk.azu.magazyn.persistance;
 
 import pl.edu.pk.azu.magazyn.exceptions.NoItemFound;
+import pl.edu.pk.azu.magazyn.model.IdProjektu;
 import pl.edu.pk.azu.magazyn.model.Projekt;
 import pl.edu.pk.azu.magazyn.model.Stan;
 
@@ -54,6 +55,21 @@ public class ProjektRepositoryFileImpl implements ProjektRepository {
             }
         }
         return projectIdList;
+    }
+
+    @Override
+    public List<Projekt> getAll() {
+        return null;
+    }
+
+    @Override
+    public int count(Stan stan) {
+        return 0;
+    }
+
+    @Override
+    public int count(IdProjektu idProjektu) {
+        return 0;
     }
 
     private void addProjectToList(Projekt projekt, final List<Integer> projectIdList) {

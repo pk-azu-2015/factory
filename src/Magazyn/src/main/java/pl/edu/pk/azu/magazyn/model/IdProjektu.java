@@ -1,11 +1,16 @@
 package pl.edu.pk.azu.magazyn.model;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+
 public enum IdProjektu {
-    KOLO(1),
-    SILNIK(2),
-    KAROSERIA(3),
-    PILOT(4),
-    AUTO(5);
+    KOLO(0),
+    SILNIK(1),
+    KAROSERIA(2),
+    PILOT(3),
+    AUTO(4);
 
     private int id;
 
@@ -22,7 +27,31 @@ public enum IdProjektu {
         return null;
     }
 
+    public static int getMaxId() {
+
+        IdProjektu[] values = values();
+        Arrays.sort(values, new IdComparator());
+        int maxId = values[0].getId();
+
+        return maxId;
+    }
+
     public int getId() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        return "IdProjektu{" +
+                id + " : " + name() +
+                '}';
+    }
+
+    private static class IdComparator implements Comparator<IdProjektu> {
+        @Override
+        public int compare(IdProjektu o1, IdProjektu o2) {
+            return Integer.compare(o1.getId(), o2.getId());
+        }
+    }
+
 }

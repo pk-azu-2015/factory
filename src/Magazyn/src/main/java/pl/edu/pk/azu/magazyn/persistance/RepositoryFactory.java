@@ -10,8 +10,8 @@ public class RepositoryFactory {
 
     public static FormaRepository newInstanceFormRepository() {
         if(formaRepository == null) {
-           formaRepository = new FormaRepositoryDBImpl();
-    //        formaRepository = new FormaRepositoryFileImpl();
+//           formaRepository = new FormaRepositoryDBImpl();
+            formaRepository = new FormaRepositoryFileImpl();
         }
         return formaRepository;
     }
@@ -19,16 +19,16 @@ public class RepositoryFactory {
 
     public static ProjektRepository newInstanceProjektRepository() {
         if (projektRepository == null) {
-            projektRepository = new ProjektRepositoryDBImpl();
-      //      projektRepository = new ProjektRepositoryFileImpl();
+//            projektRepository = new ProjektRepositoryDBImpl();
+            projektRepository = new ProjektRepositoryFileImpl();
         }
         return projektRepository;
     }
 
     public static SurowiecRepository newInstanceSurowiecRepository() {
         if(surowiecRepository == null) {
-            surowiecRepository = new SurowiecRepositoryDBImpl();
-      //      surowiecRepository = new SurowiecRepositoryFileImpl();
+//            surowiecRepository = new SurowiecRepositoryDBImpl();
+            surowiecRepository = new SurowiecRepositoryFileImpl();
         }
         return surowiecRepository;
     }

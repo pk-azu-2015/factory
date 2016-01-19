@@ -6,6 +6,8 @@ import pl.edu.pk.azu.magazyn.exceptions.ItemUsed;
 import pl.edu.pk.azu.magazyn.exceptions.NoItemFound;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import pl.edu.pk.azu.magazyn.model.*;
@@ -75,6 +77,19 @@ public class FormaRepositoryDBImpl implements FormaRepository{
         } catch (SQLException ex) {
             Logger.getLogger(FormaRepositoryDBImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @Override
+    public List<Forma> getAll() {
+        List<Forma> list = new ArrayList<Forma>();
+
+        return list;
+
+    }
+
+    @Override
+    public int count(IdProjektu idProjektu) {
+        return 0;
     }
 
 }
