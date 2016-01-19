@@ -80,16 +80,22 @@ public class FormaRepositoryDBImpl implements FormaRepository{
     }
 
     @Override
-    public List<Forma> getAll() {
-        List<Forma> list = new ArrayList<Forma>();
-
-        return list;
-
-    }
-
-    @Override
     public int count(IdProjektu idProjektu) {
+        try {
+            if (checkIfExistsAndFillResultSet(idProjektu)) {
+                return getCounter();   
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FormaRepositoryDBImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return 0;
+    }
+    
+    private boolean checkIfExistsAndFillResultSet (IdProjektu idProjektu) throws SQLException {
+        resultSet = connection.execQuery("select * from "  + tableName +  " where idProjektu = \"" +
+               idProjektu.name() + "\";");
+         
+        return resultSet.next();
     }
 
 }

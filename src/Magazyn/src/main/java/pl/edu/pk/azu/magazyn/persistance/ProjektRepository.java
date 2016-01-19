@@ -21,11 +21,6 @@ public interface ProjektRepository {
      */
     List<Integer> zwrocProjektyOStanie(Stan stan);
 
-    List<Projekt> getAll();
-
-    int count(Stan stan);
-
-    int count(IdProjektu idProjektu);
-
+    int count(Stan stan, IdProjektu idProjektu);
 
 }

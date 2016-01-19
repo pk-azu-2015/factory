@@ -74,11 +74,6 @@ public class FormaRepositoryFileImpl implements FormaRepository {
     }
 
     @Override
-    public List<Forma> getAll() {
-        return null;
-    }
-
-    @Override
     public int count(IdProjektu idProjektu) {
         return 0;
     }

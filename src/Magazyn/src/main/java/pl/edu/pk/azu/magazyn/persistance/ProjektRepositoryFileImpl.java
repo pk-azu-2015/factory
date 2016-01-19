@@ -57,21 +57,6 @@ public class ProjektRepositoryFileImpl implements ProjektRepository {
         return projectIdList;
     }
 
-    @Override
-    public List<Projekt> getAll() {
-        return null;
-    }
-
-    @Override
-    public int count(Stan stan) {
-        return 0;
-    }
-
-    @Override
-    public int count(IdProjektu idProjektu) {
-        return 0;
-    }
-
     private void addProjectToList(Projekt projekt, final List<Integer> projectIdList) {
         int counter =  projektyCounter.get(projekt).intValue();
         for (int i = 0; i < counter; i++) {
@@ -94,5 +79,10 @@ public class ProjektRepositoryFileImpl implements ProjektRepository {
 
     private boolean lessThanZero(int projectCounterAfterDecrementation) {
         return projectCounterAfterDecrementation < 0;
+    }
+
+    @Override
+    public int count(Stan stan, IdProjektu idProjektu) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

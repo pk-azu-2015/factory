@@ -14,8 +14,6 @@ public interface FormaRepository {
 
     void uzyjForme(Forma forma) throws NoItemFound, ItemUsed;
 
-    List<Forma> getAll();
-
     int count(IdProjektu idProjektu);
 
 

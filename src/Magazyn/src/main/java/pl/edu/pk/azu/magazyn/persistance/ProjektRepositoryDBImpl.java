@@ -108,19 +108,25 @@ public class ProjektRepositoryDBImpl implements ProjektRepository {
     }
 
     @Override
-    public List<Projekt> getAll() {
-        return null;
-    }
-
-    @Override
-    public int count(Stan stan) {
+    public int count(Stan stan, IdProjektu idProjektu) {
+       
+        try {
+            if(checkIfExistsProjektAndFillResultSet(stan, idProjektu)){
+                return getCounter();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjektRepositoryDBImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         return 0;
     }
-
-    @Override
-    public int count(IdProjektu idProjektu) {
-        return 0;
+    private boolean checkIfExistsProjektAndFillResultSet (Stan stan, IdProjektu idProjektu) throws SQLException {
+        resultSet = connection.execQuery("select * from "  + tableName +  " where typ = \"" +
+               idProjektu.name() + "\" and " +
+               "stan = \"" + stan.name() + "\";");
+         
+        return resultSet.next();
     }
 
-
+    
 }
