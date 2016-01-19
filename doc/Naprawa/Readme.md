@@ -9,7 +9,7 @@ http://azurepairapp2015.somee.com/RepairService.asmx
 | ---------------- | ------------------------------------------------ | -------   | :---: |
 | naprawProdukt  | id produktu, stan | status naprawy    | -      |
 
-**naprawProdukt**: operacja przyjmująca na wejście id produktu o nieznanym stanie. Operacja sprawdza, czy stan jest "ZEPSUTY" (ad. Magazyn). Jesli tak - produkt jest naprawiany (pobranie z magazynu produktu o zadanym id i umieszczenie w magazynie takiego samego produktu, ale naprawianego) i zwracany jest status naprawy "true". Jesli stan jest inny - status naprawy "false" (brak operacji).
+**naprawProdukt**: operacja przyjmująca na wejście produkt o stanie "ZEPSUTY". Produkt jest naprawiany (zmiana stanu na "GOTOWY") i umieszczany w magazynie z nowym stanem. Zwracany jest status naprawy "true". Jesli stan jest inny - status naprawy "false" (brak operacji).
 
 
 ###Powiązania z innymi usługami:
@@ -31,6 +31,7 @@ Powiązania zawarte są w operacjach „naprawProdukt” (powiązanie z Magazyne
 
 ```
 changelog :
+2016-01-19: Uściślenie opisu głównej metody.
 2015-12-08: Dodanie diagramu sekwencji.
 2015-12-08: Uaktualnienie diagramu przypadków użycia.
 2015-11-24: Uaktualnienie diagramu klas.
