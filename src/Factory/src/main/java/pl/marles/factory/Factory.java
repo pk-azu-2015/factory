@@ -14,10 +14,11 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.xml.ws.WebServiceRef;
+import wsdl.classes.BadParam_Exception;
 import wsdl.classes.IdProjektu;
 import wsdl.classes.ItemUsed_Exception;
 import wsdl.classes.Magazyn;
-import wsdl.classes.Magazyn_Service;
+import wsdl.classes.MagazynImpl;
 import wsdl.classes.NoItemFound_Exception;
 import wsdl.classes.Stan;
 
@@ -27,7 +28,7 @@ import wsdl.classes.Stan;
         portName = "FactoryPort")
 public class Factory {
     @WebServiceRef(wsdlLocation = "http://localhost:8080/Magazyn/Magazyn?wsdl")
-    private Magazyn_Service service;
+    private Magazyn service;
     
     private final String NAZWA_PLIKU = "zamowienia.txt";
     
@@ -35,7 +36,7 @@ public class Factory {
     public int wykonajForme(@WebParam(name = "ID_Projektu") int idProjektu) {
         
         try {
-            Magazyn magazyn = service.getMagazynPort();
+            MagazynImpl magazyn = service.getMagazynPort();
             magazyn.wezSurowiec(1);
             
             magazyn.dodajForme(idProjektu);
@@ -47,14 +48,19 @@ public class Factory {
 
     @WebMethod(operationName = "wykonajOdlew")
     public boolean wykonajOdlew(@WebParam(name = "ID_Projektu") int idProjekt) {
-        Magazyn magazyn = service.getMagazynPort();
+        MagazynImpl magazyn = service.getMagazynPort();
         try {
             magazyn.uzyjForme(idProjekt);
         } catch (Exception ex) {
             Logger.getLogger(Factory.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-        magazyn.umiescProdukt(idProjekt, EnumUtils.stanToInt(Stan.ODLANY));
+        try {
+            magazyn.umiescProdukt(idProjekt, Stan.ODLANY.ordinal());
+        } catch (BadParam_Exception ex) {
+            Logger.getLogger(Factory.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
         return true;
     }
     
@@ -62,7 +68,7 @@ public class Factory {
     
     @WebMethod(operationName = "szlifuj")
     public boolean szlifuj(@WebParam(name = "ID_Projektu") int idProjekt) {
-        Magazyn magazyn = new Magazyn_Service().getMagazynPort();
+        MagazynImpl magazyn = service.getMagazynPort();
         try {
             magazyn.wezProdukt(idProjekt, EnumUtils.stanToInt(Stan.ODLANY));
             magazyn.umiescProdukt(idProjekt, EnumUtils.stanToInt(Stan.OSZLIFOWANY));
@@ -75,10 +81,10 @@ public class Factory {
     
     @WebMethod(operationName = "maluj")
     public boolean maluj(@WebParam(name = "ID_Projektu") int idProjekt) {
-        Magazyn magazyn = new Magazyn_Service().getMagazynPort();
+        MagazynImpl magazyn = service.getMagazynPort();
         try {
             magazyn.wezProdukt(idProjekt, EnumUtils.stanToInt(Stan.OSZLIFOWANY));
-            magazyn.umiescProdukt(idProjekt, EnumUtils.stanToInt(Stan.POMALOWANY));
+            magazyn.umiescProdukt(idProjekt, EnumUtils.stanToInt(Stan.DO_KONTROLI));
         } catch (Exception ex) {
             Logger.getLogger(Factory.class.getName()).log(Level.SEVERE, null, ex);
             return false;
@@ -88,7 +94,7 @@ public class Factory {
     
     @WebMethod(operationName = "zlozSamochod")
     public boolean zlozSamochod() {
-        Magazyn magazyn = new Magazyn_Service().getMagazynPort();
+        MagazynImpl magazyn = service.getMagazynPort();
         int gotowyStan = Stan.GOTOWY.ordinal();
         try {
             magazyn.wezProdukt(IdProjektu.KAROSERIA.ordinal(), gotowyStan);
