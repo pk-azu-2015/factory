@@ -5,6 +5,7 @@
  */
 package com.marles.factorytimer;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,7 +26,9 @@ import wsdl.classes.MagazynImpl;
 @Singleton
 public class TimerService {
     
-     @WebServiceRef(wsdlLocation="http://localhost:8080/Factory-1.0-SNAPSHOT/Factory?wsdl")
+    private static String TAG = "Factory Timer: ";
+    
+    @WebServiceRef(wsdlLocation="http://localhost:8080/Factory-1.0-SNAPSHOT/Factory?wsdl")
     Factory_Service factoryService;
      
     @WebServiceRef(wsdlLocation="http://localhost:8080/Magazyn/Magazyn?wsdl")
@@ -37,35 +40,50 @@ public class TimerService {
          MagazynImpl magazynPort = magazynService.getMagazynPort();
          Logger logger = Logger.getLogger(Factory.class.getName());
          int iloscZamowien = factoryPort.czytajIloscZamowien();
+        logger.log(Level.INFO, TAG + "Ilość zamówień: " + iloscZamowien);
          if (iloscZamowien <= 0) {
              return;
          }
          int partsSize = 4;
          boolean[] parts = new boolean[partsSize];
          List<Integer> listaProduktow = magazynPort.zwrocListeIDProduktow(Stan.GOTOWY.ordinal());
-         if (listaProduktow != null) {
+         listaProduktow.addAll(magazynPort.zwrocListeIDProduktow(Stan.DO_KONTROLI.ordinal()));
+         listaProduktow.addAll(magazynPort.zwrocListeIDProduktow(Stan.OSZLIFOWANY.ordinal()));
+         listaProduktow.addAll(magazynPort.zwrocListeIDProduktow(Stan.ODLANY.ordinal()));
+         listaProduktow.addAll(magazynPort.zwrocListeIDProduktow(Stan.ZEPSUTY.ordinal()));
+        if (listaProduktow != null) {
              if (!listaProduktow.contains(IdProjektu.SILNIK.ordinal())) {
                  parts[0] = wykonajProjekt(factoryPort, IdProjektu.SILNIK);
+                 if (parts[0]) {
+                    logger.log(Level.INFO, TAG + "Wykonano slink");                 
+                 }
              }
              if (!listaProduktow.contains(IdProjektu.KAROSERIA.ordinal())) {
                  parts[1] = wykonajProjekt(factoryPort, IdProjektu.KAROSERIA);
+                 if (parts[1]) {
+                    logger.log(Level.INFO, TAG + "Wykonano karoserie");                     
+                 }
              }
              if (!listaProduktow.contains(IdProjektu.KOLO.ordinal())) {
                  parts[2] = wykonajProjekt(factoryPort, IdProjektu.KOLO);
+                 if (parts[2]) {
+                    logger.log(Level.INFO, TAG + "Wykonano koło");
+                 }
              }
              if (!listaProduktow.contains(IdProjektu.PILOT.ordinal())) {
                  parts[3] = wykonajProjekt(factoryPort, IdProjektu.PILOT);
+                 if (parts[3]) {
+                    logger.log(Level.INFO, TAG + "Wykonano pilot");                 
+                 }
              }
             if (wszystkoTrue(parts)) {
-               logger.log(Level.INFO, "Wykonano wszystkie częsći");
-            } else {
-               logger.log(Level.INFO, "Wykonano nie wszystkie częsći");
+               logger.log(Level.INFO, TAG + "Wykonano wszystkie częsći");
             }
             if (factoryPort.zlozSamochod()) {
-               logger.log(Level.INFO, "Wykonano jeden samochodzik");
+               logger.log(Level.INFO, TAG + "Wykonano jeden samochodzik");
                 factoryPort.zapiszIlosc(iloscZamowien - 1);
             } else {
-               logger.log(Level.INFO, "Nie wykonano żadnego samochodzika");
+               logger.log(Level.INFO, TAG + "Nie wykonano żadnego samochodzika");
             }
         }
     }
