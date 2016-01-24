@@ -53,25 +53,25 @@ public class TimerService {
          listaProduktow.addAll(magazynPort.zwrocListeIDProduktow(Stan.ZEPSUTY.ordinal()));
         if (listaProduktow != null) {
              if (!listaProduktow.contains(IdProjektu.SILNIK.ordinal())) {
-                 parts[0] = wykonajProjekt(factoryPort, IdProjektu.SILNIK);
+                 parts[0] = wykonajProjekt(magazynPort, factoryPort, IdProjektu.SILNIK);
                  if (parts[0]) {
                     logger.log(Level.INFO, TAG + "Wykonano slink");                 
                  }
              }
              if (!listaProduktow.contains(IdProjektu.KAROSERIA.ordinal())) {
-                 parts[1] = wykonajProjekt(factoryPort, IdProjektu.KAROSERIA);
+                 parts[1] = wykonajProjekt(magazynPort, factoryPort, IdProjektu.KAROSERIA);
                  if (parts[1]) {
                     logger.log(Level.INFO, TAG + "Wykonano karoserie");                     
                  }
              }
              if (!listaProduktow.contains(IdProjektu.KOLO.ordinal())) {
-                 parts[2] = wykonajProjekt(factoryPort, IdProjektu.KOLO);
+                 parts[2] = wykonajProjekt(magazynPort, factoryPort, IdProjektu.KOLO);
                  if (parts[2]) {
                     logger.log(Level.INFO, TAG + "Wykonano koło");
                  }
              }
              if (!listaProduktow.contains(IdProjektu.PILOT.ordinal())) {
-                 parts[3] = wykonajProjekt(factoryPort, IdProjektu.PILOT);
+                 parts[3] = wykonajProjekt(magazynPort, factoryPort, IdProjektu.PILOT);
                  if (parts[3]) {
                     logger.log(Level.INFO, TAG + "Wykonano pilot");                 
                  }
@@ -88,19 +88,28 @@ public class TimerService {
         }
     }
 
-    private boolean wykonajProjekt(Factory factory, IdProjektu idProjektu) {
-         int id = idProjektu.ordinal();
-        if (factory.wykonajForme(id) == -1) {
-            return false;
+    private boolean wykonajProjekt(MagazynImpl magazynPort, Factory factory, IdProjektu idProjektu) {
+        int id = idProjektu.ordinal();
+        List<Integer> odlane = magazynPort.zwrocListeIDProduktow(Stan.ODLANY.ordinal());
+        if (!odlane.contains(id)) {
+            if (factory.wykonajForme(id) == -1) {
+               return false;
+            }
+            if (!factory.wykonajOdlew(id)) {
+               return false;
+            }
         }
-        if (!factory.wykonajOdlew(id)) {
-            return false;
+        List<Integer> oszlifowane = magazynPort.zwrocListeIDProduktow(Stan.OSZLIFOWANY.ordinal());
+        if (!oszlifowane.contains(id)) {
+            if (!factory.szlifuj(id)) {
+               return false;            
+            }
         }
-        if (!factory.szlifuj(id)) {
-            return false;            
-        }
-        if (!factory.maluj(id)) {
-            return false;            
+        List<Integer> pomalowane = magazynPort.zwrocListeIDProduktow(Stan.POMALOWANY.ordinal());
+        if (!pomalowane.contains(id)) {
+            if (!factory.maluj(id)) {
+               return false;            
+            }
         }
         return true;
     }
