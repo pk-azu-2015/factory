@@ -48,8 +48,6 @@ public class TimerService {
          boolean[] parts = new boolean[partsSize];
          List<Integer> listaProduktow = magazynPort.zwrocListeIDProduktow(Stan.GOTOWY.ordinal());
          listaProduktow.addAll(magazynPort.zwrocListeIDProduktow(Stan.DO_KONTROLI.ordinal()));
-         listaProduktow.addAll(magazynPort.zwrocListeIDProduktow(Stan.OSZLIFOWANY.ordinal()));
-         listaProduktow.addAll(magazynPort.zwrocListeIDProduktow(Stan.ODLANY.ordinal()));
          listaProduktow.addAll(magazynPort.zwrocListeIDProduktow(Stan.ZEPSUTY.ordinal()));
         if (listaProduktow != null) {
              if (!listaProduktow.contains(IdProjektu.SILNIK.ordinal())) {
