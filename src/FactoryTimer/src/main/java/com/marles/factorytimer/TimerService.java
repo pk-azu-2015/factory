@@ -49,6 +49,7 @@ public class TimerService {
          List<Integer> listaProduktow = magazynPort.zwrocListeIDProduktow(Stan.GOTOWY.ordinal());
          listaProduktow.addAll(magazynPort.zwrocListeIDProduktow(Stan.DO_KONTROLI.ordinal()));
          listaProduktow.addAll(magazynPort.zwrocListeIDProduktow(Stan.ZEPSUTY.ordinal()));
+         
         if (listaProduktow != null) {
              if (!listaProduktow.contains(IdProjektu.SILNIK.ordinal())) {
                  parts[0] = wykonajProjekt(magazynPort, factoryPort, IdProjektu.SILNIK);
