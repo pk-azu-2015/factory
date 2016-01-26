@@ -32,6 +32,9 @@ Powiązania zawarte są w operacjach „naprawProdukt” (powiązanie z Magazyne
 
 ![alt text](http://funkyimg.com/i/25hpG.png "Diagram sekwencji")
 
+
+Diagramy narysowane przy pomocy serwisu http://creately.com/
+
 ```
 changelog :
 2016-01-19: Uściślenie opisu głównej metody oraz zasady działania aplikacji klienckiej.
